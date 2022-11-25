@@ -1,0 +1,45 @@
+img {
+    width: 8.438rem;
+    height: 8.438rem;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.row{
+    font-size: 15px;
+    grid-gap: 20px 0px;
+}
+
+.card {
+    height: 294px;
+    width: 238px;
+    border-radius: 10px;
+    padding: 16px;
+    gap: 10px;
+}
+
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* FORMULARIO */
+
+.section-img{
+    width: 100%;
+}
+.cuadrado {
+    margin: auto;
+    width: 169px;
+    height: 180px;
+    background: #BCEFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
