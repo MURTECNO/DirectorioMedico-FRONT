@@ -1,6 +1,5 @@
 import React from 'react'
 import perrito from '../assets/perrito.jpg'
-import '../styles/gird.css'
 
 export const GirdDoctor = ({doctor}) => {
 

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { AddDoctor } from './Components/AddDoctor';
-import { GirdDoctor } from './Components/GirdDoctor';
+import { AddDoctor } from './AddDoctor';
+import { GirdDoctor } from './GirdDoctor';
 
 export const CardDoctor = () => {
 
   const [doctores, setDoctores] = useState([]);
 
-  const onNewDoctor = ({ name, lastname, cmp, celular, trayectoria}, sexo, especialidad, servicio, hospital ) => {
+  const onNewDoctor = ({ name, lastname, cmp, celular, trayectoria, especialidad}, sexo, servicio, hospital ) => {
     setDoctores([...doctores, {
       name: name,
       lastname: lastname,

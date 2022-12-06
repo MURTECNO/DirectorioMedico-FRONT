@@ -12,38 +12,18 @@ export const AddDoctor = ({ onNewDoctor }) => {
   } = useForm({ mode: "onBlur" });
 
   const [sexo, setSexo] = useState("");
-  const [especialidad, setEspecialidad] = useState([]);
   const [servicio, setServicio] = useState([]);
-  const [hospital, setHospital] = useState([]);
+  const [hospital, setHospital] = useState([""]);
 
   const onSubmit = (data, e) => {
     e.target.reset();
-    onNewDoctor(data, sexo, especialidad, servicio, hospital);
-    setEspecialidad([]);
+    onNewDoctor(data, sexo, servicio, hospital);
     setServicio([]);
-    setHospital([]);
+    setHospital([""]);
   };
 
   const onChangeCheckradio = ({ target }) => {
     setSexo(target.value);
-  };
-
-  // CRUD ESPECIALIDAD
-  const hanldeAddEspecialidad = () => {
-    const addInputEspecialidad = [...especialidad, []];
-    setEspecialidad(addInputEspecialidad);
-  };
-
-  const handleChangeEspecialidad = (datoEspecialidad, index) => {
-    const inputEspecialidad = [...especialidad];
-    inputEspecialidad[index] = datoEspecialidad.target.value;
-    setEspecialidad(inputEspecialidad);
-  };
-
-  const handleDeleteEspecialidad = (index) => {
-    const deleteEspecialidad = [...especialidad];
-    deleteEspecialidad.splice(index, 1);
-    setEspecialidad(deleteEspecialidad);
   };
 
   // CRUD SERVICIO
@@ -84,30 +64,29 @@ export const AddDoctor = ({ onNewDoctor }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="m-5">
-        <div className="d-flex page-section">
-          <div className="section-img">
-            <div className="cuadrado">
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="label"
-              >
-                <input
-                  type="file"
-                  hidden
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                  }}
-                />
-                <PhotoCamera />
-              </IconButton>
-            </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="form-section">
+
+          <div className="cuadrado">
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="label"
+            >
+              <input
+                type="file"
+                hidden
+                onChange={(e) => {
+                  console.log(e.target.value);
+                }}
+              />
+              <PhotoCamera />
+            </IconButton>
           </div>
 
-          <div className="row mt-5">
+
+          <div className="form-inputs row mt-5 col-sm-12 col-md-12 col-lg-8 col-xl-8">
             {/* Apellidos */}
-            <div className="col-12">
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Apellidos: </label>
               <input
                 {...register("lastname", {
@@ -125,7 +104,7 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </div>
 
             {/* Nombres */}
-            <div className="col-12">
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Nombres: </label>
               <input
                 {...register("name", {
@@ -139,7 +118,7 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </div>
 
             {/* CMP */}
-            <div className="col-12">
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>CMP: </label>
               <input
                 {...register("cmp", {
@@ -152,7 +131,7 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </div>
 
             {/* Celular */}
-            <div className="col-12">
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Celular: </label>
               <input 
                 {...register("celular", {
@@ -166,6 +145,8 @@ export const AddDoctor = ({ onNewDoctor }) => {
             {/* sexo */}
             <div className="col-12">
               <div onChange={onChangeCheckradio}>
+                <label htmlFor="">Género:</label>
+                <br />
                 <input
                   className="form-check-input"
                   type="radio"
@@ -193,83 +174,60 @@ export const AddDoctor = ({ onNewDoctor }) => {
               ></textarea>
             </div>
 
-            {/* Inputs */}
-            <div className="col-6 ">
-              {/* Especialidad */}
-              <div className="col-12">
-                <label>Especialidad </label>
-                <IconButton 
-                  color="info" 
-                  component="label" 
-                  onClick={() => {
-                        hanldeAddEspecialidad();
-                  }}>
-                  <SiAddthis />
-                </IconButton>
+            {/* Especialidad */}
+            <div className="col-12">
+              <label htmlFor="">Especialidad</label>
+              <select
+                {...register("especialidad")}
+                className="form-control"
+                placeholder="Seleccionar..."
+                name="" 
+                id=""
+              >
+                <option value="0">Seleccionar</option>
+                <option value="1">Cardiología</option>
+              </select>
+            </div>
 
-                {especialidad.map((data, index) => {
-                  return (
-                    <div key={index} className="d-flex">
-                      <input
-                        value={data}
-                        className="form-control"
-                        onChange={(e) => {
-                          handleChangeEspecialidad(e, index);
-                        }}
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleDeleteEspecialidad(index);
-                        }}
-                      >
-                        X
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
+            {/* Servicio */}
+            <div className="col-12 my-3">
+              <label>Servicio </label>
+              <IconButton 
+                color="info" 
+                component="label" 
+                onClick={() => {
+                      hanldeAddServicio();
+                }}>
+                <SiAddthis />
+              </IconButton>
 
-              {/* Servicio */}
-              <div className="col-12 my-3">
-                <label>Servicio </label>
-                <IconButton 
-                  color="info" 
-                  component="label" 
-                  onClick={() => {
-                        hanldeAddServicio();
-                  }}>
-                  <SiAddthis />
-                </IconButton>
+              {servicio.map((data, index) => {
+                return (
+                  <div key={index} className="d-flex">
+                    <input
+                      value={data}
+                      className="form-control"
+                      onChange={(e) => {
+                        handleChangeServicio(e, index);
+                      }}
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-info"
+                      onClick={() => {
+                        handleDeleteServicio(index);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
 
-                {servicio.map((data, index) => {
-                  return (
-                    <div key={index} className="d-flex">
-                      <input
-                        value={data}
-                        className="form-control"
-                        onChange={(e) => {
-                          handleChangeServicio(e, index);
-                        }}
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleDeleteServicio(index);
-                        }}
-                      >
-                        X
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Hospital*/}
-              <div className="col-12">
-                <label>Hospital </label>
+            {/* Hospital*/}
+              <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <label>Centro de salud</label>
                 <IconButton 
                   color="primary" 
                   component="label" 
@@ -278,32 +236,47 @@ export const AddDoctor = ({ onNewDoctor }) => {
                   }}>
                   <SiAddthis />
                 </IconButton>
-
-                {hospital.map((data, index) => {
-                  return (
-                    <div key={index} className="d-flex my-3">
-                      <input
-                        value={data}
-                        className="form-control"
-                        onChange={(e) => {
-                          handleChangeHospital(e, index);
-                        }}
-                      />
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleDeleteHospital(index);
-                        }}
-                      >
-                        X
-                      </button>
-                    </div>
-                  );
-                })}
               </div>
 
-            </div>
+              {hospital.map((data, index) => {
+                return (
+                  <div key={index} className="">
+                    <div className="row col-12 d-flex">
+                      <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <input
+                        value={data} 
+                        type="text" 
+                        className="form-control"
+                        placeholder="Nombre entidad"
+                        onChange={(e) => {
+                          handleChangeHospital(e, index);
+                        }} />
+                      </div>
+                      <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <select 
+                          {...register('distrito')}
+                          className="form-select"
+                          name="" 
+                          id=""
+                        >
+                          <option value="0">Distrito de la entidad</option>
+                          <option value="1">San Martin de Porres</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="btn btn-info"
+                      onClick={() => {
+                        handleDeleteHospital(index);
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
 
             <div className="col-3">
               <button className="btn btn-primary" type="submit">
@@ -312,8 +285,6 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </div>
 
           </div>
-
-        </div>
       </form>
     </>
   );

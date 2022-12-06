@@ -1,4 +1,4 @@
-img {
+.container-card img {
     width: 8.438rem;
     height: 8.438rem;
     border-radius: 50%;
@@ -7,7 +7,8 @@ img {
 
 .row{
     font-size: 15px;
-    grid-gap: 20px 0px;
+    grid-gap: 30px 0px;
+    margin:0;
 }
 
 .card {
@@ -29,17 +30,123 @@ img {
     align-items: center;
 }
 
-/* FORMULARIO */
+/*NAVBAR*/
 
-.section-img{
+.navBar{
+    /* position: absolute; */
     width: 100%;
+    padding: 16px 206px;
+    background-color: #FFFFFF;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.cuadrado {
+
+.navBar .content-nav{
+    max-width: 1200px;
+    display: flex;
     margin: auto;
-    width: 169px;
-    height: 180px;
+    justify-content: space-between;
+}
+
+.navBar img{
+    width: 80px;
+    margin-left: 15px;
+}
+
+/*Search Doctor*/
+.img-vector{
+    width: 100%;
+    position: absolute;
+    
+}
+
+.busqueda{
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+}
+
+.busqueda .img-portada{
+    width: 556px;
+    position: relative;
+}
+
+/* FORMULARIO */
+.form-section{
+    max-width: 1200px;
+    display: flex;
+    margin: auto;
+    /* padding: 0 180px; */
+}
+
+.form-inputs{
+    margin-left: 35px;
+}
+
+.cuadrado {
+    width: 317px;
+    height: 500px;
     background: #BCEFFF;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
+
+@media screen and (max-width: 1600px) {
+    
+
+}
+
+
+@media screen and (max-width: 1350px) {
+
+    .form-section{
+        flex-direction: column;
+        /* padding: 0 180px; */
+    }
+
+    .cuadrado {
+        margin: auto;
+        width: 237px;
+        height: 420px;
+        background: #BCEFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+
+@media screen and (max-width: 600px) {
+    .form-section{
+        padding: 0;
+    }
+
+    .form-inputs{
+        margin: 0;
+    }
+
+    .cuadrado {
+        margin: auto;
+        width: 169px;
+        height: 180px;
+        background: #BCEFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navBar{
+        padding: 15px;
+        width: 100%;
+        height: 50px;
+    }
+
+    .navBar img{
+        width: 80px;
+        margin-left: 8px;
+    }
+}
+
