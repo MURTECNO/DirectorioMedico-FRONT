@@ -15,11 +15,11 @@ export const AddDoctor = ({ onNewDoctor }) => {
   const [servicio, setServicio] = useState([]);
   const [hospital, setHospital] = useState([""]);
 
+  // SUBMIT FORM
   const onSubmit = (data, e) => {
     e.target.reset();
-    onNewDoctor(data, sexo, servicio, hospital);
-    setServicio([]);
-    setHospital([""]);
+    setServicio([]); // Se inicializa el array de servicios
+    setHospital([""]); // Se inicializa el array de centros
   };
 
   const onChangeCheckradio = ({ target }) => {

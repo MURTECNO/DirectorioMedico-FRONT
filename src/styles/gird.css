@@ -1,37 +1,7 @@
-.container-card img {
-    width: 8.438rem;
-    height: 8.438rem;
-    border-radius: 50%;
-    margin: auto;
+body{
+    font-family: 'Roboto', sans-serif;
 }
-
-.row{
-    font-size: 15px;
-    grid-gap: 30px 0px;
-    margin:0;
-}
-
-.card {
-    height: 294px;
-    width: 238px;
-    border-radius: 10px;
-    padding: 16px;
-    gap: 10px;
-}
-
-.container-cards {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.container-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /*NAVBAR*/
-
 .navBar{
     /* position: absolute; */
     width: 100%;
@@ -50,27 +20,6 @@
 .navBar img{
     width: 80px;
     margin-left: 15px;
-}
-
-/*Search Doctor*/
-.img-vector{
-    width: 100%;
-    position: absolute;
-    
-}
-
-.busqueda{
-    max-width: 1280px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: absolute;
-}
-
-.busqueda .img-portada{
-    width: 556px;
-    position: relative;
 }
 
 /* FORMULARIO */
@@ -93,9 +42,72 @@
     justify-content: center;
 }
 
+/* VISTA PRINCIPAL */
+.section-vector{
+    position: absolute;
+    width: 100%;
+}
+.img-vector{
+    height: 20rem;
+    width: 100%;
+}
+
+.search-section{
+    max-width: 1280px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.search-section .img-portada{
+    width: 560px;
+}
+
+.search-inputs{
+    background: linear-gradient(90deg, #2B5876 0%, #4E4376 100%);
+    border-radius: 20px;
+    min-width: 950px;
+}
+
+.mostrar-filtro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* MOSTRAR CARDS */
+.container-cards {
+    max-width: 1000px;
+    text-align: center;
+}
+
+.card {
+    height: 284px;
+    width: 228px;
+    border-radius: 10px;
+    padding: 16px;
+    gap: 10px;
+    margin: 0;
+}
+
+.card img {
+    width: 8.438rem;
+    height: 8.438rem;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.row{
+    font-size: 15px;
+    grid-gap: 30px 0px;
+    margin:0;
+}
+
 @media screen and (max-width: 1600px) {
     
-
+    
 }
 
 
@@ -114,6 +126,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    
+    .search-inputs{
+        min-width: 650px !important;
+        margin: 0 20px;
     }
 
 }
@@ -147,6 +164,15 @@
     .navBar img{
         width: 80px;
         margin-left: 8px;
+    }
+    
+    .img-portada{
+        display: none;
+    }
+    
+    .search-inputs{
+        min-width: 300px !important;
+        margin: 0 20px;
     }
 }
 
