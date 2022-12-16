@@ -8,7 +8,7 @@ export const SearchDoctor
     = () => {
         return (
             <>
-                <div className="search-header">
+                <div className="search-header mb-5">
                     <div className='section-vector mt-5'>
                         <img className='img-vector' src={fondo} alt="" />
                     </div>
