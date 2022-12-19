@@ -1,20 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { CardDoctor } from './Components/CardDoctor';
-import { Navbar } from './views/Navbar';
+import { BrowserRouter} from "react-router-dom";
+import { AppRouter } from './router/AppRouter';
+
 import './styles/gird.css'
-import { SearchDoctor } from './Components/SearchDoctor';
-import { AddDoctor } from './Components/AddDoctor';
-import { PerfilDoctor } from './Components/PerfilDoctor';
+import { Navbar } from './views/Navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Navbar/>
-    {/* <AddDoctor/> */}
-    {/* <SearchDoctor/> */}
-    {/* <CardDoctor /> */}
-    <PerfilDoctor/>
+    <BrowserRouter>
+      {/* <Navbar/> */}
+      <AppRouter/>
+      
+    </BrowserRouter>
   </React.StrictMode>
 );
 
