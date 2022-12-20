@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import perrito from '../assets/perrito.jpg'
-import {datos}  from '../data.js'
+import perrito from '../../assets/perrito.jpg'
+import {datos}  from '../../data.js'
 
 export const CardDoctor = () => {
 

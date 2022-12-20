@@ -1,6 +1,6 @@
 import React from 'react'
-import fondo from '../assets/Vector.png'
-import imgPortada from '../assets/portada.png'
+import fondo from '../../assets/Vector.png'
+import imgPortada from '../../assets/portada.png'
 import { InputsSearch } from './InputsSearch'
 import { CardDoctor } from './CardDoctor'
 
