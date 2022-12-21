@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { datos } from '../../data'
+import { datos } from '../data/data'
 
 
 export const PerfilDoctor = () => {
