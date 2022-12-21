@@ -1,13 +1,13 @@
 import { MdReorder } from "react-icons/md";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 
-export const Navbar = () => {
+export const NavbarIngreso = () => {
 
     const navigate = useNavigate();
 
-    const onGoLogin = ()=>{
-        navigate('login', {
+    const onLogout = ()=>{
+        navigate('/inicio', {
             replace: true
         });
     }
@@ -17,19 +17,15 @@ export const Navbar = () => {
             <div className="content-nav">
                 <div className="navLeft">
                     <MdReorder size = {23} />
-                    <Link 
-                        className="navbar-brand" 
-                        to="inicio"
-                    >
-                        <img src={logo} alt="" />
-                    </Link>
+                    <img src={logo} alt="" />
+
                 </div>
 
                 <div className="navRight">
                     <button 
                         className="btn btn-primary"
-                        onClick={ onGoLogin }
-                    >Ingresar</button>
+                        onClick={ onLogout }
+                    >salir</button>
                 </div>
             </div>
             

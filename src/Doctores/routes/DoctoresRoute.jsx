@@ -1,7 +1,7 @@
-import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from '../../ui'
-import { SearchDoctor, AddDoctor } from '../Components'
+import { SearchDoctor} from '../Components'
+import { SearchPage, DoctorPage } from '../pages'
 
 export const DoctoresRoute = () => {
   return (
@@ -10,7 +10,8 @@ export const DoctoresRoute = () => {
 
         <Routes>
             <Route path="inicio" element={ <SearchDoctor/> } />
-            <Route path="formulario" element={ <AddDoctor/> } />
+            <Route path="search" element={ <SearchPage/>} />
+            <Route path="doctor" element={ <DoctorPage/>} />
         </Routes>
     </>
   )
