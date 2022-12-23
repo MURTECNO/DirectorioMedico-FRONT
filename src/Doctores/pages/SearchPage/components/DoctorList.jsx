@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CardDoctor } from "./";
-import { getDoctors } from "../../api";
+import { CardDoctor } from "./CardDoctor";
+import { getDoctors } from "../api";
 
 const NO_SELECTED = '0';
 
@@ -38,7 +38,7 @@ export const DoctorList = ({ especialidadFilter, districtFilter }) => {
 
     return (
         <>
-            <div className='container-cards row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3'>
+            <div className='container-cards'>
                 {
                     doctores.map( doctor => {
                         const { id, apellidos, id_sexo } = doctor;

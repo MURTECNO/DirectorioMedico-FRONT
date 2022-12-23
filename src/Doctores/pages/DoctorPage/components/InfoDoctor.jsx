@@ -14,6 +14,7 @@ export const InfoDoctor = (props) => {
         hospitales
     } = props;
 
+    const url = `https://api.whatsapp.com/send?phone=+51${celular}&text=Hola, me gustaría separar una cita con usted`
     console.log('InfoDoctor', {props})
 
     return (
@@ -22,56 +23,62 @@ export const InfoDoctor = (props) => {
                 <img className="img-format" src={perrito} alt={apellidos} />
             </div>
 
-            <div className="info-content m-4">
-
-                <h4>
-                    <span>{id_sexo === 1 ? 'Dra. ' : 'Dr. '}</span>
-                    {`${nombres} ${apellidos}`}
-                </h4>
-
-                <div className="">
-                    <p><FaUserMd/>CMP: {cmp}</p>
-
-                    <div className="d-flex mb-3">
-                        <div className="card mx-2 p-3" style={{width:'13rem'}}>
-                            <center><FaMedkit size={25}/></center>
-                            <div className="mt-2">
-                                <ul>
-                                    {
-                                        especialidades.map( especialidad => {
-                                            const { id, nombre } = especialidad
-                                            return (
-                                                <li key={ id }>
-                                                    <p>{ nombre }</p>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="d-flex mb-3">
-                        {hospitales.map(hos=>(
-                            <div className="card mx-2 p-3" style={{width:'13rem'}} key={ cmp }>
-                                <center><FaHospitalAlt size={25}/></center>
-                                <div className="mt-2">
-                                    <p>Hospital: {hos.nombre}</p>
-                                    <p>Distrito: {hos.distrito}</p>
-                                    <p>Dirección: {hos.direccion}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <p>Trayectoria Profesional: {trayectoria}</p>
-
-                    <button className="btn" style={{background:'#45C655', color:'#FFFFFF'}}>
-                        <FaWhatsapp size={20}/> Whatsapp
-                    </button>
-                
+            <div className="info-content">
+                <div className="my-4">
+                    <h3>
+                        <b>
+                            <span>{id_sexo === 1 ? 'Dra. ' : 'Dr. '}</span>
+                            {`${nombres} ${apellidos}`}
+                        </b>
+                    </h3>
                 </div>
+
+                <div className="me-1">
+                    <b><span><FaUserMd size={15} className='mb-1 me-2'/>CMP: </span></b> 
+                    {cmp}
+                </div>
+
+                <div className="me-1 my-3 d-flex">
+                    <b><FaMedkit size={15} className='mb-1 me-2'/>Especialidad: </b>
+                    {
+                        especialidades.map( especialidad => {
+                            const { id, nombre } = especialidad
+                            return (
+                                <div key={ id } className="mx-1">
+                                    { nombre } //
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div>
+                    {
+                        hospitales.map( hos => {
+                            const { nombre } = hos
+                            return (
+                                <div key={ cmp }>
+                                    <b><span><FaHospitalAlt size={15} className='mb-1 me-2 my-1'/>Hospital: </span></b>
+                                    {nombre}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+
+                <div className="my-3">
+                    <b>Trayectoria Profesional: </b> 
+                    <ul>
+                        {trayectoria}
+                    </ul>
+                </div>
+
+                <a target="_blank" href={url}>
+                    <div className="btn my-2" style={{background:'#45C655', color:'#FFFFFF'}}>
+                        <FaWhatsapp size={20} className='mb-1 me-1'/> Whatsapp
+                    </div>
+                </a>
+  
             </div>
             </>
     )

@@ -1,4 +1,23 @@
 /* PERFIL DOCTOR */
 .info-content{
-    font-size: 14px;
+    font-size: 15px;
+    margin-top: 3rem;
+    margin-left: 3rem;
 }
+
+.container-servicios{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-servicio{
+    width: 18rem;
+    height: 13rem;
+    margin: 15px;
+    padding: 2rem;
+}
+
+.card-servicio p{
+    font-size: 15px;
+}
+

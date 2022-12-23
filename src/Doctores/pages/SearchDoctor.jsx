@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import fondo from '../../assets/Vector.png'
 import imgPortada from '../../assets/portada.png'
-import { InputsSearch } from './InputsSearch'
-import { DoctorList } from './DoctorList'
+import { InputsSearch, DoctorList } from './SearchPage'
+
+import './SearchPage/searchStyle.css'
 
 const NO_SELECTED = '0';
 
@@ -23,7 +24,7 @@ export const SearchDoctor
 
         return (
             <>
-                <div className="section search-header mb-5">
+                <div className=" mb-5">
                     <div className='section-vector mt-5'>
                         <img className='img-vector' src={fondo} alt="" />
                     </div>
@@ -39,6 +40,7 @@ export const SearchDoctor
                             />
                         </div>
                     </div>
+
                     <div className="mostrar-filtro mt-5">
                         <h4 className='my-4'>Staff Médico</h4>
                         <DoctorList

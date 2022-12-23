@@ -1,3 +1,3 @@
-export * from '../Doctores/pages/DoctorPage/api/getDoctorById';
+export * from './getDistritos';
 export * from './getDoctors';
 export * from './getEspecialidades';
