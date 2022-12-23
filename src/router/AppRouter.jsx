@@ -7,13 +7,15 @@ import { Login } from '../auth'
 export const AppRouter = () => {
   return (
     <>
-      <Routes>
         
-        <Route path="login" element={ <Login/> }/>
-        <Route path="/*" element={ <DoctoresRoute/> }/>
-        <Route path="/formulario" element={ <FormularioRoute/> }/>
+          <Routes>
+              <Route path="login" element={ <Login/> }/>
+              <Route path="/*" element={ <DoctoresRoute/> }/>
+              <Route path="/formulario" element={ <FormularioRoute/> }/>
+            
 
-      </Routes>
+          </Routes>
+        
     </>
   )
 }

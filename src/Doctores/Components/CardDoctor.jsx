@@ -1,36 +1,34 @@
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import perrito from '../../assets/perrito.jpg'
-import {datos}  from '../data/data.js'
 
-export const CardDoctor = () => {
-
-  const [doctores, setDoctores] = useState([]);
-   
-  useEffect(() => {
-    setDoctores(datos)
-  }, [])
+export const CardDoctor = ({
+  id,
+  apellidos,
+  id_sexo,
+  especialidad,
+}) => {
 
   return (
     <>
-      {/* Mostrar Doctor */}
-      <div className='container-cards row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4'>
-        {doctores.map((doctores, index) => {
-          return (
-            <div key={index} >
-              <div className='card'>
-                <img src={perrito} alt="" />
-                <span>
-                  <b>{doctores.sexo === '1' ? 'Dra.' : 'Dr.'} </b>{doctores.lastname}
-                </span>
-                {doctores.especialidad}
-                <br />
-                <div>
-                  <button className='btn btn-primary btn-sm'>Ver más</button>
-                </div>
-              </div>
+      <div key={id} className="col">
+        <div className='card card-search'>
+
+          <img className='img-format' src={perrito} alt={apellidos} />
+
+          <span>
+            <b>{id_sexo === '1' ? 'Dra.' : 'Dr.'} </b>{apellidos.split(' ')[0]}
+          </span>
+
+          {especialidad}
+
+          <br />
+
+          <Link to={`/perfil/${id}`}>
+            <div>
+              <button className='btn btn-primary btn-sm'>Ver más</button>
             </div>
-          );
-        })}
+          </Link>
+        </div>
       </div>
     </>
   )
