@@ -1,4 +1,3 @@
-export * from './Components';
 export * from './pages/DoctorPage/api';
 export * from './pages/DoctorPage/components';
 export * from './pages/SearchPage/api';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getEspecialidades, getDistritos } from "../api";
 
-export const InputsSearch = ({ onFiter, setEspecialidadFilter, setDistrictFilter }) => {
+export const InputsSearch = ({ onFilter, setEspecialidadFilter, setDistrictFilter }) => {
 
   const [especialidades, setEspecialidades] = useState([]);
   const [distritos, setDistritos] = useState([]);
@@ -31,7 +31,7 @@ export const InputsSearch = ({ onFiter, setEspecialidadFilter, setDistrictFilter
   return (
     <>
 
-      <form onSubmit={ onFiter } className='row'>
+      <form onSubmit={ onFilter } className='row'>
 
         {/* especialidad */}
         <div className='input-specialty col-12 col-sm-5'>

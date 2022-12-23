@@ -1,3 +1,4 @@
+export * from './AddDoctor';
 export * from './DoctorPage/api';
 export * from './DoctorPage/components';
 export * from './PerfilDoctor';

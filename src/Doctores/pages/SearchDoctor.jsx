@@ -13,13 +13,13 @@ export const SearchDoctor
         const [especialidadFilter, setEspecialidadFilter] = useState(NO_SELECTED);
         const [districtFilter, setDistrictFilter] = useState(NO_SELECTED);
 
-        const onFiter = (event, ) => {
+        const onFilter = (event, ) => {
             event.preventDefault();
             if(especialidadFilter==NO_SELECTED && districtFilter==NO_SELECTED){
               console.log('seleccina una Especialidad o Distrito')
               return
             }
-            console.log('onFiter', {especialidadSelect: especialidadFilter, distritSelect: districtFilter})
+            console.log('onFilter', {especialidadSelect: especialidadFilter, distritSelect: districtFilter})
         }
 
         return (
@@ -34,7 +34,7 @@ export const SearchDoctor
                         </div>
                         <div className="search-inputs text-center p-3 row">
                             <InputsSearch
-                                onFiter={ onFiter }
+                                onFilter={ onFilter }
                                 setEspecialidadFilter={ setEspecialidadFilter }
                                 setDistrictFilter={ setDistrictFilter }
                             />

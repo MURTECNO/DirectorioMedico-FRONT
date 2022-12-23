@@ -25,7 +25,7 @@ export const DoctorList = ({ especialidadFilter, districtFilter }) => {
 
         setDoctores(doctoresFiltered)
     }
-    
+
     useEffect(() => {
         getDoctors(setDoctores, setLoading)
     }, [])
