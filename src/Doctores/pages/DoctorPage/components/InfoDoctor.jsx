@@ -15,7 +15,6 @@ export const InfoDoctor = (props) => {
     } = props;
 
     const url = `https://api.whatsapp.com/send?phone=+51${celular}&text=Hola, me gustaría separar una cita con usted`
-    console.log('InfoDoctor', {props})
 
     return (
         <>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { getEspecialidades, getDistritos } from "../api";
+import { getEspecialidades, getDistritos, getDoctors } from "../api";
 
-export const InputsSearch = ({ onFilter, setEspecialidadFilter, setDistrictFilter }) => {
+
+
+export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, setDoctores}) => {
 
   const [especialidades, setEspecialidades] = useState([]);
   const [distritos, setDistritos] = useState([]);
@@ -16,15 +18,22 @@ export const InputsSearch = ({ onFilter, setEspecialidadFilter, setDistrictFilte
     const { target } = event;
     const { value } = target;
     console.log('onSelectEspecialidad', {value})
-    setEspecialidadFilter(value)
+    setValEspecialidad(value);
   }
 
   const onSelectDistrito = event => {
     const { target } = event;
     const { value } = target;
     console.log('onSelectDistrito', {value})
-    setDistrictFilter(value)
+    setValDistrito(value);
   }
+
+  const onClickEspecialidad = event => {
+    getDoctors(setDoctores, setLoading);
+    console.log('entra desde click');
+  }
+
+  
 
   if(loading) return <h2>loading...</h2>
 
@@ -35,7 +44,7 @@ export const InputsSearch = ({ onFilter, setEspecialidadFilter, setDistrictFilte
 
         {/* especialidad */}
         <div className='input-specialty col-12 col-sm-5'>
-          <select className='form-select' name="" id="" onChange={onSelectEspecialidad}>
+          <select className='form-select' name="" id="" onClick={onClickEspecialidad} onChange={onSelectEspecialidad}>
           <option value="0">Especialidad</option>
           {
               especialidades.map((especialidad => {

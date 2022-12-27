@@ -9,11 +9,9 @@ export const getEspecialidades = async (setData, setLoading) => {
         // fetching
         const response = await fetch(URL, requestOptions)
         const { status } = response
-        console.log({status})
 
         // parse to json
         const data =  await response.json()
-        console.log({data})
 
         // set data
         setData(data)

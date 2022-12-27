@@ -1,40 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { CardDoctor } from "./CardDoctor";
-import { getDoctors } from "../api";
 
 const NO_SELECTED = '0';
 
-export const DoctorList = ({ especialidadFilter, districtFilter }) => {
-
-    const [ doctores, setDoctores ] = useState([]);
-    const [ loading, setLoading ] = useState(true);
+export const DoctorList = ({especialidadFilter, districtFilter, doctores, setDoctores}) => {
 
     const filterDoctors = () => {
-        if(especialidadFilter == NO_SELECTED && districtFilter == NO_SELECTED) return;
+         if(especialidadFilter === NO_SELECTED && districtFilter === NO_SELECTED) return;
 
-        const doctoresFiltered = doctores.filter((doctor) => {
-            const { especialidades = [] } = doctor;
-
-            const cumpleCondicionEspecialidad = especialidades.some((especialidad) => {
-                const { id } = especialidad;
-                return (String(especialidadFilter) == String(id))
+         else{
+             const doctoresFiltered = doctores.filter((doctor) => {
+                
+                 const { especialidades = [] } = doctor;
+                 const cumpleCondicionEspecialidad = especialidades.some((especialidad) => {
+                     const { id } = especialidad;
+                     return (String(especialidadFilter) === String(id))
+                 })
+                 return cumpleCondicionEspecialidad;
+    
             })
-            return cumpleCondicionEspecialidad;
-
-        })
-
-        setDoctores(doctoresFiltered)
+         
+            setDoctores(doctoresFiltered);
+        }
     }
 
-    useEffect(() => {
-        getDoctors(setDoctores, setLoading)
-    }, [])
-
-    useEffect(() => {
-        filterDoctors()
-    }, [especialidadFilter, districtFilter])
-
-    if(loading) return <h2>loading...</h2>
+    useEffect(()=>{
+        filterDoctors();
+    }, [especialidadFilter])
 
     return (
         <>

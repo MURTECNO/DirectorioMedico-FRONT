@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { SiAddthis } from "react-icons/si";
+import { AddEspecialidad, AddHospital } from "./index";
 
 export const AddDoctor = ({ onNewDoctor }) => {
   const {
@@ -12,8 +13,9 @@ export const AddDoctor = ({ onNewDoctor }) => {
   } = useForm({ mode: "onBlur" });
 
   const [sexo, setSexo] = useState("");
-  const [servicio, setServicio] = useState([]);
+  const [servicio, setServicio] = useState([""]);
   const [hospital, setHospital] = useState([""]);
+  const [optionEspecialidad, setOptionEspecialidad] = useState([]);
 
   // SUBMIT FORM
   const onSubmit = (data, e) => {
@@ -22,14 +24,19 @@ export const AddDoctor = ({ onNewDoctor }) => {
     setHospital([""]); // Se inicializa el array de centros
   };
 
+  const onVer = ()=>{
+    console.log('opciones seleccionadas 2' , optionEspecialidad);
+  }
+
   const onChangeCheckradio = ({ target }) => {
     setSexo(target.value);
   };
 
   // CRUD SERVICIO
   const hanldeAddServicio = () => {
-    const addInputServicio = [...servicio, []];
+    const addInputServicio = [...servicio, ''];
     setServicio(addInputServicio);
+    console.log(addInputServicio);
   };
 
   const handleChangeServicio = (datoServicio, index) => {
@@ -64,6 +71,8 @@ export const AddDoctor = ({ onNewDoctor }) => {
 
   return (
     <>
+
+      <AddHospital/>
       <form onSubmit={handleSubmit(onSubmit)} className="form-section">
 
           <div className="cuadrado">
@@ -83,13 +92,15 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </IconButton>
           </div>
 
+          
+
 
           <div className="form-inputs row mt-5 col-sm-12 col-md-12 col-lg-8 col-xl-8">
             {/* Apellidos */}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Apellidos: </label>
               <input
-                {...register("lastname", {
+                {...register("apellidos", {
                   required: true,
                   pattern: /^[A-Za-z]/i,
                 })}
@@ -107,7 +118,7 @@ export const AddDoctor = ({ onNewDoctor }) => {
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Nombres: </label>
               <input
-                {...register("name", {
+                {...register("nombres", {
                   required: true,
                   pattern: /^[A-Za-z]/i,
                 })}
@@ -141,9 +152,21 @@ export const AddDoctor = ({ onNewDoctor }) => {
               />
               {errors?.celular?.type === "pattern" && <p>Escribir 9 digitos</p>}
             </div>
+            
+            {/*dni*/}
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <label>DNI: </label>
+              <input 
+                {...register("dni", {
+                  pattern: /^[1-9]{9}$/,
+                })} 
+                className="form-control" 
+              />
+              {errors?.celular?.type === "pattern" && <p>Escribir 9 digitos</p>}
+            </div>
 
             {/* sexo */}
-            <div className="col-12">
+            <div className="col-6">
               <div onChange={onChangeCheckradio}>
                 <label htmlFor="">Género:</label>
                 <br />
@@ -176,17 +199,11 @@ export const AddDoctor = ({ onNewDoctor }) => {
 
             {/* Especialidad */}
             <div className="col-12">
-              <label htmlFor="">Especialidad</label>
-              <select
-                {...register("especialidad")}
-                className="form-control"
-                placeholder="Seleccionar..."
-                name="" 
-                id=""
-              >
-                <option value="0">Seleccionar</option>
-                <option value="1">Cardiología</option>
-              </select>
+              <AddEspecialidad 
+                optionEspecialidad={optionEspecialidad} 
+                setOptionEspecialidad={setOptionEspecialidad}
+              />
+              <button type="button" onClick={ onVer }> Ver2 </button>
             </div>
 
             {/* Servicio */}
