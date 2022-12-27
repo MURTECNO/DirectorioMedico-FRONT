@@ -1,176 +1,166 @@
 import { useEffect, useState } from "react";
 import { getEspecialidades, postEspecialidad } from "../../index";
-import IconButton from "@mui/material/IconButton";
-import { SiAddthis } from "react-icons/si";
 
 export const AddEspecialidad = ({
+
   optionEspecialidad,
   setOptionEspecialidad,
-}) => {
-  const [especialidades, setEspecialidades] = useState([]); //get especialidad
-  const [valEspecialidad, setValEspecialidad] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [status, setStatus] = useState("");
-  const [display, setDisplay] = useState("none");
 
-  //Get especialidad al primer renderizado
-  useEffect(() => {
-    getEspecialidades(setEspecialidades, setLoading);
-  }, []);
+  }) => {
 
-  //Evento para actualizar las options del select
-  const onGetData = () => {
-    getEspecialidades(setEspecialidades, setLoading);
-  };
+    const [especialidades, setEspecialidades] = useState([]); //get especialidad
+    const [valEspecialidad, setValEspecialidad] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [status, setStatus] = useState("");
+    const [display, setDisplay] = useState("none");
 
-  const onAgregarEspecialidad = (event) => {
-    const { target } = event;
-    const { value } = target;
-    setValEspecialidad(value);
-  };
+    //Get especialidad al primer renderizado
+    useEffect(() => {
+      getEspecialidades(setEspecialidades, setLoading);
+    }, []);
 
-  const onEnviarEspecialidad = () => {
-    setDisplay("none");
+    //Evento para actualizar las options del select
+    const onGetData = () => {
+      getEspecialidades(setEspecialidades, setLoading);
+      setValEspecialidad('');
+    };
 
-    if (valEspecialidad === "") {
-      alert("Completar este campo");
-    } else {
-      postEspecialidad(valEspecialidad, setStatus);
+    const onAgregarEspecialidad = (event) => {
+      const { target } = event;
+      const { value } = target;
+      setValEspecialidad(value);
+    };
+
+    const onEnviarEspecialidad = () => {
+      setDisplay("none");
+
+      if (valEspecialidad === "") {
+        alert("Completar este campo");
+      } else {
+        postEspecialidad(valEspecialidad, setStatus);
+      }
+    };
+
+    //Capturar valor del select
+    const onEspecialidad = (event, index) => {
+      const { target } = event;
+      const { value } = target;
+      const inputEspecialidad = [...optionEspecialidad];
+
+      inputEspecialidad[index] = value;
+      setOptionEspecialidad(inputEspecialidad);
+
+      if (value == especialidades.length + 1) {
+        setDisplay("");
+      }
+
+    };
+
+    const handleAddEspecialidad = () => {
+      const addInputEspecialidad = [...optionEspecialidad, ''];
+      setOptionEspecialidad(addInputEspecialidad);
     }
-  };
 
-  //Capturar valor del select
-  const onEspecialidad = (event, index) => {
-    const { target } = event;
-    const { value } = target;
-    console.log('value select: ' +value)
-    
-    const valueSelect = [...optionEspecialidad];
-    valueSelect[ index ] = value;
-    setOptionEspecialidad(valueSelect);
+    const handleDeleteEspecialidad = ( index ) =>{
 
-    if (value === especialidades.length + 1) {
-      setDisplay("");
+      const deleteEspecialidad = [...optionEspecialidad];
+
+      deleteEspecialidad.splice(index, 1);
+      setOptionEspecialidad(deleteEspecialidad);
+
     }
 
-  };
+    const onVer = ()=>{
+      console.log('opciones seleccionadas' , optionEspecialidad);
+    }
 
-  const handleAddEspecialidad = () => {
-    const addInputEspecialidad = [...optionEspecialidad, ''];
-    setOptionEspecialidad(addInputEspecialidad);
-    
-  }
+    if (loading) return <h2>loading...</h2>;
 
-  const handleDeleteEspecialidad = (index) =>{
-    
-  }
+    return (
+        <>
 
-  const onVer = ()=>{
-    console.log('opciones seleccionadas' , optionEspecialidad);
-  }
-
-  if (loading) return <h2>loading...</h2>;
-
-  return (
-    <>
-      <div className="col-12">
-
-        {/* Seleccionar Especialidad */}
-        <label>Especialidad</label>
-        <IconButton
-            color="info"
-            component="label"
-            onClick={() => {
-                handleAddEspecialidad();
-            }}
-        >
-            <SiAddthis />
-        </IconButton>
-
-        <select
-            className="form-select"
-            onChange={onEspecialidad}
-            onClick={onGetData}
-        >
-          <option value="0">Seleccionar</option>
-          {
-            especialidades.map((especialidad) => {
-
-                const { id, nombre } = especialidad;
-
-                return (
-                <option key={id} value={id}>
-                    {nombre}
-                </option>
-                );
-
-            })
-          }
-          <option value={especialidades.length + 1}>Otro</option>
-        </select>
-
-        {
-            optionEspecialidad.map( (optEspecialidad, index) =>{
-
-                return(
-                    <div 
-                        key={ index }
-                        className="d-flex my-3"
-                    >
-
-                        <select 
-                            
-                            className="form-select"
-                            onChange={onEspecialidad}
-                            onClick={onGetData}
-                        >
-                            <option value="0">Seleccionar</option>
-                            {
-                                especialidades.map((especialidad) => {
-
-                                    const { id, nombre } = especialidad;
-
-                                    return (
-                                    <option key={id} value={id}>
-                                        {nombre}
-                                    </option>
-                                    );
-
-                                })
-                            }
-                            <option value={especialidades.length + 1}>Otro</option>
-                        </select>
-
-                        <button
-                            type="button"
-                            className="btn btn-danger mx-2"
-                            onClick={() => {
-                                handleDeleteEspecialidad(index);
-                            }}
-                        > - </button>
-
-
-                    </div>
-                )
-            })
-        }
-
-        <button type="button" onClick={ onVer }> Ver </button>
-
-        {/* Agregar Especialidad */}
-        <div style={{ display: display }}>
-          <label htmlFor="">Escribir especialidad:</label>
-          <input
-            type="text"
-            value={valEspecialidad}
-            onChange={onAgregarEspecialidad}
-          />
-
-          <button type="button" onClick={onEnviarEspecialidad}>
-            Agregar
+          {/* Seleccionar Especialidad */}
+          <label>Especialidad *</label>
+          <br />
+          <button 
+            type="button" 
+            className="btn btn-outline-primary"
+            onClick={ handleAddEspecialidad }
+          >
+               Agregar Especialidad
           </button>
-        </div>
-      </div>
-    </>
-  );
+
+          {
+              optionEspecialidad.map( (data, index) =>{
+
+                  return(
+                      <div 
+                          key={ index }
+                          className="d-flex my-3"
+                      >
+
+                          <select 
+                              className="form-select"
+                              onChange={ e =>{
+                                onEspecialidad( e, index);
+                              }}
+                              onFocus={onGetData}
+                          >
+                              <option value="0">Seleccionar</option>
+                              {
+                                  especialidades.map((especialidad) => {
+
+                                      const { id, nombre } = especialidad;
+
+                                      return (
+                                      <option key={id} value={id}>
+                                          {nombre}
+                                      </option>
+                                      );
+
+                                  })
+                              }
+                              <option value={especialidades.length + 1}>Otro</option>
+                          </select>
+
+                          <button
+                              type="button"
+                              className="btn ms-2 btn-outline-danger"
+                              onClick={ ()=>{
+                                handleDeleteEspecialidad(index);
+                              }}
+                          > Eliminar 
+                          </button>
+
+                      </div>
+                  )
+              })
+          }
+
+          {/* <button type="button" onClick={ onVer }> Ver </button> */}
+
+          {/* Agregar Especialidad */}
+          <div style={{ display: display }} className="input-group mb-3">
+
+            <br />
+            <input
+              type="text"
+              value={valEspecialidad}
+              onChange={onAgregarEspecialidad}
+              className = "form-control"
+              placeholder="Escribir Especialidad"
+              aria-label="Recipient's username" aria-describedby="button-addon2"
+            />
+
+            <button 
+              type="button" 
+              id="button-addon2"
+              onClick={onEnviarEspecialidad}
+              className="btn btn-outline-primary"
+            >
+              Agregar
+            </button>
+          </div>
+        </>
+    );
 };

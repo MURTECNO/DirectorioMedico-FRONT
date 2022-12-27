@@ -14,18 +14,17 @@ export const AddDoctor = ({ onNewDoctor }) => {
 
   const [sexo, setSexo] = useState("");
   const [servicio, setServicio] = useState([""]);
-  const [hospital, setHospital] = useState([""]);
   const [optionEspecialidad, setOptionEspecialidad] = useState([]);
+  const [optHospital, setOptHospital] = useState([]);
 
   // SUBMIT FORM
   const onSubmit = (data, e) => {
     e.target.reset();
     setServicio([]); // Se inicializa el array de servicios
-    setHospital([""]); // Se inicializa el array de centros
   };
 
   const onVer = ()=>{
-    console.log('opciones seleccionadas 2' , optionEspecialidad);
+    console.log('opciones seleccionadas ' , optHospital);
   }
 
   const onChangeCheckradio = ({ target }) => {
@@ -51,28 +50,9 @@ export const AddDoctor = ({ onNewDoctor }) => {
     setServicio(deleteServicio);
   };
 
-  // CRUD CENTRO
-  const hanldeAddHospital = () => {
-    const addInputHospital = [...hospital, []];
-    setHospital(addInputHospital);
-  };
-
-  const handleChangeHospital = (datoHospital, index) => {
-    const inputHospital = [...hospital];
-    inputHospital[index] = datoHospital.target.value;
-    setHospital(inputHospital);
-  };
-
-  const handleDeleteHospital = (index) => {
-    const deleteHospital = [...hospital];
-    deleteHospital.splice(index, 1);
-    setHospital(deleteHospital);
-  };
 
   return (
     <>
-
-      <AddHospital/>
       <form onSubmit={handleSubmit(onSubmit)} className="form-section">
 
           <div className="cuadrado">
@@ -203,8 +183,14 @@ export const AddDoctor = ({ onNewDoctor }) => {
                 optionEspecialidad={optionEspecialidad} 
                 setOptionEspecialidad={setOptionEspecialidad}
               />
-              <button type="button" onClick={ onVer }> Ver2 </button>
+              {/* <button type="button" onClick={ onVer }> Ver2 </button> */}
             </div>
+
+            {/* Hospital*/}
+            <AddHospital 
+              setOptHospital={setOptHospital}
+              optHospital={optHospital}
+            />
 
             {/* Servicio */}
             <div className="col-12 my-3">
@@ -242,58 +228,6 @@ export const AddDoctor = ({ onNewDoctor }) => {
               })}
             </div>
 
-            {/* Hospital*/}
-              <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <label>Centro de salud</label>
-                <IconButton 
-                  color="primary" 
-                  component="label" 
-                  onClick={() => {
-                        hanldeAddHospital();
-                  }}>
-                  <SiAddthis />
-                </IconButton>
-              </div>
-
-              {hospital.map((data, index) => {
-                return (
-                  <div key={index} className="">
-                    <div className="row col-12 d-flex">
-                      <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <input
-                        value={data} 
-                        type="text" 
-                        className="form-control"
-                        placeholder="Nombre entidad"
-                        onChange={(e) => {
-                          handleChangeHospital(e, index);
-                        }} />
-                      </div>
-                      <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <select 
-                          {...register('distrito')}
-                          className="form-select"
-                          name="" 
-                          id=""
-                        >
-                          <option value="0">Distrito de la entidad</option>
-                          <option value="1">San Martin de Porres</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      className="btn btn-info"
-                      onClick={() => {
-                        handleDeleteHospital(index);
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                );
-              })}
 
             <div className="col-3">
               <button className="btn btn-primary" type="submit">
