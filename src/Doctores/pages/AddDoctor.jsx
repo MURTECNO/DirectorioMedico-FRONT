@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { SiAddthis } from "react-icons/si";
-import { AddEspecialidad, AddHospital } from "./index";
+import { AddEspecialidad, AddHospital, AddServicios } from "./index";
 
 export const AddDoctor = ({ onNewDoctor }) => {
   const {
@@ -16,6 +15,9 @@ export const AddDoctor = ({ onNewDoctor }) => {
   const [servicio, setServicio] = useState([""]);
   const [optionEspecialidad, setOptionEspecialidad] = useState([]);
   const [optHospital, setOptHospital] = useState([]);
+  const [listServicios, setListServicios] = useState([])
+  const [nombreS, setNombreS] = useState('');
+  const [descripcionS, setDescripcionS] = useState('');
 
   // SUBMIT FORM
   const onSubmit = (data, e) => {
@@ -24,7 +26,7 @@ export const AddDoctor = ({ onNewDoctor }) => {
   };
 
   const onVer = ()=>{
-    console.log('opciones seleccionadas ' , optHospital);
+    console.log('servcios: ' , listServicios);
   }
 
   const onChangeCheckradio = ({ target }) => {
@@ -32,11 +34,7 @@ export const AddDoctor = ({ onNewDoctor }) => {
   };
 
   // CRUD SERVICIO
-  const hanldeAddServicio = () => {
-    const addInputServicio = [...servicio, ''];
-    setServicio(addInputServicio);
-    console.log(addInputServicio);
-  };
+  
 
   const handleChangeServicio = (datoServicio, index) => {
     const inputServicio = [...servicio];
@@ -72,10 +70,8 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </IconButton>
           </div>
 
-          
-
-
           <div className="form-inputs row mt-5 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+            
             {/* Apellidos */}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Apellidos: </label>
@@ -178,13 +174,11 @@ export const AddDoctor = ({ onNewDoctor }) => {
             </div>
 
             {/* Especialidad */}
-            <div className="col-12">
-              <AddEspecialidad 
-                optionEspecialidad={optionEspecialidad} 
-                setOptionEspecialidad={setOptionEspecialidad}
-              />
-              {/* <button type="button" onClick={ onVer }> Ver2 </button> */}
-            </div>
+            <AddEspecialidad 
+              optionEspecialidad={optionEspecialidad} 
+              setOptionEspecialidad={setOptionEspecialidad}
+            />
+            <button type="button" onClick={ onVer }> Ver2 </button>
 
             {/* Hospital*/}
             <AddHospital 
@@ -193,41 +187,44 @@ export const AddDoctor = ({ onNewDoctor }) => {
             />
 
             {/* Servicio */}
-            <div className="col-12 my-3">
-              <label>Servicio </label>
-              <IconButton 
-                color="info" 
-                component="label" 
-                onClick={() => {
-                      hanldeAddServicio();
-                }}>
-                <SiAddthis />
-              </IconButton>
+            <div className="col-12">
 
-              {servicio.map((data, index) => {
-                return (
-                  <div key={index} className="d-flex">
-                    <input
-                      value={data}
-                      className="form-control"
-                      onChange={(e) => {
-                        handleChangeServicio(e, index);
-                      }}
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-info"
-                      onClick={() => {
-                        handleDeleteServicio(index);
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                );
-              })}
+              <label >Servicios *</label>
+              <br />
+              <button 
+                      type="button" 
+                      className="btn btn-outline-primary"
+                      onClick={ hanldeAddServicio }
+                  >
+                      Agregar Servicio
+                  </button>
+              <br />
+
+              {
+                  listServicios.map( (data, index) =>{
+                      
+                      return (
+                          <div key={ index }>
+                              <div className="d-flex mt-3 mb-2">
+                                  <input 
+                                      className="form-control" 
+                                      placeholder="Nombre Servicio"
+                                      onChange={ onNombreS }
+                                  />
+                                  <button type='button' className='btn btn-outline-danger ms-2'>Eliminar</button>
+                              </div>
+                              <textarea 
+                                  className="form-control" 
+                                  placeholder="Descripcion del Servicio"
+                                  onChange={ onDescripcionS }
+                              ></textarea>
+
+                          </div>
+                      )
+                  })
+              }
+
             </div>
-
 
             <div className="col-3">
               <button className="btn btn-primary" type="submit">

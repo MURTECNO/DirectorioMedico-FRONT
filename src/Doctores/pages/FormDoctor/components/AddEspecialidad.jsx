@@ -77,7 +77,7 @@ export const AddEspecialidad = ({
     if (loading) return <h2>loading...</h2>;
 
     return (
-        <>
+        <div className="col-12">
 
           {/* Seleccionar Especialidad */}
           <label>Especialidad *</label>
@@ -161,6 +161,6 @@ export const AddEspecialidad = ({
               Agregar
             </button>
           </div>
-        </>
+        </div>
     );
 };

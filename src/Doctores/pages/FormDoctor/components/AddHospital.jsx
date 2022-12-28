@@ -24,7 +24,6 @@ export const AddHospital = ({
         const addInputHospital = [...optHospital, ''];
         setOptHospital(addInputHospital);
 
-        console.log('', hospitales);
       };
     
     const handleDeleteHospital = (index) => {
@@ -139,12 +138,12 @@ export const AddHospital = ({
 
                 <div className='col-4'>
                     <label >Nombre:</label>
-                    <input type="text" className='form-control' onChange={ onNombreH }/>
+                    <input type="text" className='form-control' value={nombreH} onChange={ onNombreH }/>
                 </div>
 
                 <div className='col-3'>
                     <label >Distrito:</label>
-                    <select className='form-select' onChange={ onDistritoH }>
+                    <select className='form-select' value={distritoH} onChange={ onDistritoH }>
                         <option value="0">Seleccionar</option>
                         {
                             distritos.map( distrito =>{
@@ -164,7 +163,7 @@ export const AddHospital = ({
 
                 <div className='col-4'>
                     <label >Dirección:</label>
-                    <input type="text" className='form-control' onChange={ onDireccionH }/>
+                    <input type="text" className='form-control' value={direccionH} onChange={ onDireccionH }/>
                 </div>
 
                 <div className='col-1 mt-4 pt-1'>
