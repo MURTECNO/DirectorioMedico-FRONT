@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { getEspecialidades, postEspecialidad } from "../../index";
 
 export const AddEspecialidad = ({
-
   optionEspecialidad,
   setOptionEspecialidad,
-
   }) => {
 
     const [especialidades, setEspecialidades] = useState([]); //get especialidad
@@ -68,10 +66,6 @@ export const AddEspecialidad = ({
       deleteEspecialidad.splice(index, 1);
       setOptionEspecialidad(deleteEspecialidad);
 
-    }
-
-    const onVer = ()=>{
-      console.log('opciones seleccionadas' , optionEspecialidad);
     }
 
     if (loading) return <h2>loading...</h2>;
@@ -137,8 +131,6 @@ export const AddEspecialidad = ({
               })
           }
 
-          {/* <button type="button" onClick={ onVer }> Ver </button> */}
-
           {/* Agregar Especialidad */}
           <div style={{ display: display }} className="input-group mb-3">
 
@@ -161,6 +153,7 @@ export const AddEspecialidad = ({
               Agregar
             </button>
           </div>
+
         </div>
     );
 };

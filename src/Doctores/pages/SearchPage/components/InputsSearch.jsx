@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getEspecialidades, getDistritos, getDoctors } from "../api";
 
-
-
 export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, setDoctores}) => {
 
   const [especialidades, setEspecialidades] = useState([]);
@@ -17,20 +15,17 @@ export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, set
   const onSelectEspecialidad = event => {
     const { target } = event;
     const { value } = target;
-    console.log('onSelectEspecialidad', {value})
     setValEspecialidad(value);
   }
 
   const onSelectDistrito = event => {
     const { target } = event;
     const { value } = target;
-    console.log('onSelectDistrito', {value})
     setValDistrito(value);
   }
 
   const onClickEspecialidad = event => {
     getDoctors(setDoctores, setLoading);
-    console.log('entra desde click');
   }
 
   
@@ -45,6 +40,7 @@ export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, set
         {/* especialidad */}
         <div className='input-specialty col-12 col-sm-5'>
           <select className='form-select' name="" id="" onClick={onClickEspecialidad} onChange={onSelectEspecialidad}>
+          
           <option value="0">Especialidad</option>
           {
               especialidades.map((especialidad => {
@@ -55,10 +51,12 @@ export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, set
               }))
             }
           </select>
+          
         </div>
 
         {/* distrit */}
         <div className='input-district col-12 col-sm-5'>
+
           <select className='form-select' name="" id="" onChange={onSelectDistrito}>
             <option value="0">Distrito</option>
             {
@@ -70,12 +68,14 @@ export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, set
               }))
             }
           </select>
+
         </div>
 
         {/* btn */}
         <div className='btn-search-doctor col-2'>
           <button type='submit' className='btn btn-primary'>Buscar</button>
         </div>
+
       </form>
     </>
 

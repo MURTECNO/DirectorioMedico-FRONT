@@ -4,7 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { AddEspecialidad, AddHospital, AddServicios } from "./index";
 
-export const AddDoctor = ({ onNewDoctor }) => {
+export const AddDoctor = () => {
+
   const {
     register,
     handleSubmit,
@@ -12,42 +13,24 @@ export const AddDoctor = ({ onNewDoctor }) => {
   } = useForm({ mode: "onBlur" });
 
   const [sexo, setSexo] = useState("");
-  const [servicio, setServicio] = useState([""]);
   const [optionEspecialidad, setOptionEspecialidad] = useState([]);
   const [optHospital, setOptHospital] = useState([]);
-  const [listServicios, setListServicios] = useState([])
-  const [nombreS, setNombreS] = useState('');
-  const [descripcionS, setDescripcionS] = useState('');
+  const [nombreS, setNombreS] = useState([]);
+  const [descripcionS, setDescripcionS] = useState([]);
 
   // SUBMIT FORM
   const onSubmit = (data, e) => {
     e.target.reset();
-    setServicio([]); // Se inicializa el array de servicios
   };
 
   const onVer = ()=>{
-    console.log('servcios: ' , listServicios);
+    // console.log('nombres: ' , nombreS);
+    // console.log('descripciones: ' , descripcionS);
   }
 
   const onChangeCheckradio = ({ target }) => {
     setSexo(target.value);
   };
-
-  // CRUD SERVICIO
-  
-
-  const handleChangeServicio = (datoServicio, index) => {
-    const inputServicio = [...servicio];
-    inputServicio[index] = datoServicio.target.value;
-    setServicio(inputServicio);
-  };
-
-  const handleDeleteServicio = (index) => {
-    const deleteServicio = [...servicio];
-    deleteServicio.splice(index, 1);
-    setServicio(deleteServicio);
-  };
-
 
   return (
     <>
@@ -187,44 +170,13 @@ export const AddDoctor = ({ onNewDoctor }) => {
             />
 
             {/* Servicio */}
-            <div className="col-12">
+            <AddServicios
+              nombreS={nombreS}
+              setNombreS={setNombreS}
+              descripcionS={descripcionS}
+              setDescripcionS={setDescripcionS}
 
-              <label >Servicios *</label>
-              <br />
-              <button 
-                      type="button" 
-                      className="btn btn-outline-primary"
-                      onClick={ hanldeAddServicio }
-                  >
-                      Agregar Servicio
-                  </button>
-              <br />
-
-              {
-                  listServicios.map( (data, index) =>{
-                      
-                      return (
-                          <div key={ index }>
-                              <div className="d-flex mt-3 mb-2">
-                                  <input 
-                                      className="form-control" 
-                                      placeholder="Nombre Servicio"
-                                      onChange={ onNombreS }
-                                  />
-                                  <button type='button' className='btn btn-outline-danger ms-2'>Eliminar</button>
-                              </div>
-                              <textarea 
-                                  className="form-control" 
-                                  placeholder="Descripcion del Servicio"
-                                  onChange={ onDescripcionS }
-                              ></textarea>
-
-                          </div>
-                      )
-                  })
-              }
-
-            </div>
+            />
 
             <div className="col-3">
               <button className="btn btn-primary" type="submit">
