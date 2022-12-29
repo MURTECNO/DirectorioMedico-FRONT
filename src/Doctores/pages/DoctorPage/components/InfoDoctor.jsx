@@ -26,7 +26,7 @@ export const InfoDoctor = (props) => {
                 <div className="my-4">
                     <h3>
                         <b>
-                            <span>{id_sexo === 1 ? 'Dra. ' : 'Dr. '}</span>
+                            <span>{id_sexo === 0 ? 'Dra. ' : 'Dr. '}</span>
                             {`${nombres} ${apellidos}`}
                         </b>
                     </h3>

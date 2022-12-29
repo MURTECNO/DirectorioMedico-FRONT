@@ -14,6 +14,7 @@ export const AddHospital = ({
     const [nombreH, setNombreH] = useState('');
     const [distritoH, setDistritoH] = useState(0);
     const [direccionH, setDireccionH] = useState('');
+    const [arrHospital, setArrHospital] = useState([]);
 
     useEffect(()=>{
         getHospitales(setHospitales, setLoading);
@@ -21,28 +22,34 @@ export const AddHospital = ({
     },[]);
 
     const hanldeAddHospital = () => {
-        const addInputHospital = [...optHospital, ''];
-        setOptHospital(addInputHospital);
+        const addInputHospital = [...arrHospital, optHospital];
+        setArrHospital(addInputHospital);
 
       };
     
     const handleDeleteHospital = (index) => {
-      const deleteHospital = [...optHospital];
+        const indexSelect = index + 1;
+        const deleteHospital = [...optHospital];
+        const deleteArrHospital = [...arrHospital];
 
-      deleteHospital.splice(index, 1);
-      setOptHospital(deleteHospital);
+        deleteHospital.splice(indexSelect, 1);
+        deleteArrHospital.splice(index, 1);
+
+        setOptHospital(deleteHospital);
+        setArrHospital(deleteArrHospital);
     };
 
-    const onCahangeHospital = (event, index)=>{
+    const onChangeHospital = (event)=>{
         const { target } = event;
-        const { value } = target;
+        const { value, id } = target;
         const inputHospital = [...optHospital];
 
-        inputHospital[index] = value;
-        setOptHospital(inputHospital);
-
+        inputHospital[id] = value;
+        
         if (value == hospitales.length + 1) {
             setDisplay("");
+        }else{
+            setOptHospital(inputHospital);
           }
     }
 
@@ -85,56 +92,91 @@ export const AddHospital = ({
 
     return(
         <div className='col-12'>
-            <label >Centro de Salud * </label>
-            <br />
-            <button 
-                type="button" 
-                className="btn btn-outline-primary"
-                onClick={ hanldeAddHospital }
-            >
-                Agregar Hospital
-            </button>
+            {/* <hr /> */}
+            <div className='ps-2 py-3 bg-info bg-opacity-25'>
+                <label >Centros de Salud * </label>
+            </div>
+            {/* <hr /> */}
+
+            <div className="ms-3 mt-2">
+                <label>Centro de salud 1</label>
+                <div className="d-flex mt-1">
+                    <select 
+                        className='form-select'
+                        id='0'
+                        onChange={ e=>{
+                            onChangeHospital(e);
+                        }  }
+                        onFocus={onGetData}
+                    >
+                        <option value="0">Seleccionar</option>
+                        {
+                            hospitales.map(hospital => {
+                                const {id, nombre} = hospital;
+                                
+                                return(
+                                    <option key={ id } value = { id }>{ nombre }</option>
+                                )
+                            })
+                        }
+                        <option value={hospitales.length + 1}>Otro</option>
+                    </select>
+
+                    <button 
+                        type="button" 
+                        className="btn btn-outline-primary ms-2"
+                        style={{'width':'12rem'}}
+                        onClick={ hanldeAddHospital }
+                    >Agregar Hospital</button>
+
+                </div>
+            </div>
 
             {
-                optHospital.map( (data, index) =>{
+                arrHospital.map( (data, index) =>{
 
                     return(
-                        <div key={index} className="d-flex my-3">
-                            <select 
-                                className='form-select'
-                                onChange={ e =>{
-                                    onCahangeHospital(e, index);
-                                }}
-                                onFocus={onGetData}
-                            >
-                                <option value="0">Seleccionar</option>
-                                {
-                                    hospitales.map(hospital => {
-                                        const {id, nombre} = hospital;
-                                        
-                                        return(
-                                            <option key={ id } value = { id }>{ nombre }</option>
-                                        )
-                                    })
-                                }
-                                <option value={hospitales.length+1}>Otro</option>
-                            </select>
+                        <div key={index} className="ms-3 my-3">
+                            <label>Centro de salud {index + 2}</label>
+                            <div className="d-flex">
+                                <select 
+                                    className='form-select'
+                                    id={index + 1}
+                                    onChange={ e=>{
+                                        onChangeHospital(e);
+                                    }   }
+                                    onFocus={onGetData}
+                                >
+                                    <option value="0">Seleccionar</option>
+                                    {
+                                        hospitales.map(hospital => {
+                                            const {id, nombre} = hospital;
+                                            
+                                            return(
+                                                <option key={ id } value = { id }>{ nombre }</option>
+                                            )
+                                        })
+                                    }
+                                    <option value={hospitales.length+1}>Otro</option>
+                                </select>
 
-                            <button
-                                type="button"
-                                className="btn btn-outline-danger ms-2"
-                                onClick={ ()=>{
-                                    handleDeleteHospital(index);
-                                }}
-                            > Eliminar 
-                            </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-outline-danger ms-2"
+                                    onClick={ () => {
+                                        handleDeleteHospital(index);
+                                    }}
+                                > Eliminar 
+                                </button>
+
+                            </div>
                         </div>    
 
                     )
                 })
             }
 
-            <div style={{ display: display }} className="row g-1">
+            <div style={{ display: display }} className="row g-1 ms-3">
 
                 <div className='col-4'>
                     <label >Nombre:</label>

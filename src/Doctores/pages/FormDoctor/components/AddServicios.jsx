@@ -24,8 +24,6 @@ export const AddServicios = ({
             alert('llenar los campos')
         }else{
             setDisplay('');
-            setNombreS([...nombreS, valNombreS]);
-            setDescripcionS([...descripcionS, valDescripcionS]);
             setListServicios([...listServicios, {
                 nombre: valNombreS,
                 descripcion: valDescripcionS
@@ -50,25 +48,46 @@ export const AddServicios = ({
     }
 
     const handleDeleteServicio = ( index ) =>{
+        const indexArr = index + 1;
         const deleteServicio = [...listServicios];
-  
+        const deleteNombreS = [...nombreS];
+        const deleteDescripcionS = [...descripcionS];
+
+        deleteNombreS.splice(indexArr, 1);
+        deleteDescripcionS.splice(indexArr, 1);
         deleteServicio.splice(index, 1);
+
+        setNombreS(deleteNombreS);
+        setDescripcionS(deleteDescripcionS);
         setListServicios(deleteServicio);
       }
 
+    const onBlurDescripcion1 = () => {
+        console.log('onBlur')
+        setNombreS([...nombreS, valNombreS]);
+        setDescripcionS([...descripcionS, valDescripcionS]);
+    }
+
+    const onBlurDescripcion = () => {
+        console.log('onBlur')
+        if(descripcionS === '') return;
+        setNombreS([...nombreS, valNombreS]);
+        setDescripcionS([...descripcionS, valDescripcionS]);
+    }
+
   return (
     <div className="col-12 " >
-
-        <label >Servicios *</label>
-        <br />
+        {/* <hr /> */}
+        <div className='ps-2 py-3 bg-info bg-opacity-25'>
+            <label >Servicios *</label>
+        </div>
         <div className='ms-3'>
             <label className='mt-2'>Servicio 1</label>
-                <div className="d-flex mb-2">
+                <div className="d-flex mb-2 mt-1">
                     <input 
                         className="form-control" 
                         placeholder="Nombre Servicio"
                         onChange={ onNombreS }
-                        required
                     />
 
                     <button 
@@ -83,7 +102,7 @@ export const AddServicios = ({
                 className="form-control" 
                 placeholder="Descripcion del Servicio"
                 onChange={ onDescripcionS }
-                required
+                onBlur={ onBlurDescripcion1 }
             ></textarea>
         </div>
 
@@ -101,20 +120,21 @@ export const AddServicios = ({
                                 className="form-control" 
                                 placeholder="Nombre Servicio"
                                 onChange={ onNombreS }
-                                required
                             />
 
                             <button 
                                 type='button' 
                                 className='btn btn-outline-danger ms-2'
-                                onClick={ handleDeleteServicio }
+                                onClick={ ()=>{
+                                    handleDeleteServicio(index) 
+                                } }
                             >Eliminar</button>
                         </div>
                         <textarea 
                             className="form-control" 
                             placeholder="Descripcion del Servicio"
                             onChange={ onDescripcionS }
-                            required
+                            onBlur={ onBlurDescripcion }
                         ></textarea>
 
                     </div>

@@ -21,11 +21,21 @@ export const AddDoctor = () => {
   // SUBMIT FORM
   const onSubmit = (data, e) => {
     e.target.reset();
+    console.log('entra');
+    console.log(data);
   };
 
   const onVer = ()=>{
+
+    const data = {
+      "especialidades": optionEspecialidad,
+      "hospitales": optHospital,
+      "servicios_nombre": nombreS,
+      "servicios_descrip": descripcionS
+    }
     // console.log('nombres: ' , nombreS);
     // console.log('descripciones: ' , descripcionS);
+    console.log('Detalles del doctor:' , data);
   }
 
   const onChangeCheckradio = ({ target }) => {
@@ -65,10 +75,10 @@ export const AddDoctor = () => {
                 })}
                 className="form-control"
               />
-              {errors?.lastname?.type === "required" && (
+              {errors?.apellidos?.type === "required" && (
                 <p>Completar este campo</p>
               )}
-              {errors?.lastname?.type === "pattern" && (
+              {errors?.apellidos?.type === "pattern" && (
                 <p>Digitar solo texto</p>
               )}
             </div>
@@ -83,8 +93,8 @@ export const AddDoctor = () => {
                 })}
                 className="form-control"
               />
-              {errors?.name?.type === "required" && <p>Completar este campo</p>}
-              {errors?.name?.type === "pattern" && <p>Digitar solo texto</p>}
+              {errors?.nombres?.type === "required" && <p>Completar este campo</p>}
+              {errors?.nombres?.type === "pattern" && <p>Digitar solo texto</p>}
             </div>
 
             {/* CMP */}
@@ -93,11 +103,12 @@ export const AddDoctor = () => {
               <input
                 {...register("cmp", {
                   required: true,
-                  pattern: /^[1-9]{5}$/,
+                  pattern: /^[1-9]{7}$/,
                 })}
                 className="form-control"
               />
-              {errors?.cmp?.type === "pattern" && <p>Escribir 6 digitos</p>}
+              {errors?.cmp?.type === "required" && <p>Completar este campo</p>}
+              {errors?.cmp?.type === "pattern" && <p>Escribir 7 digitos</p>}
             </div>
 
             {/* Celular */}
@@ -105,10 +116,12 @@ export const AddDoctor = () => {
               <label>Celular: </label>
               <input 
                 {...register("celular", {
+                  required: true,
                   pattern: /^[1-9]{9}$/,
                 })} 
                 className="form-control" 
               />
+              {errors?.celular?.type === "required" && <p>Completar este campo</p>}
               {errors?.celular?.type === "pattern" && <p>Escribir 9 digitos</p>}
             </div>
             
@@ -117,30 +130,32 @@ export const AddDoctor = () => {
               <label>DNI: </label>
               <input 
                 {...register("dni", {
-                  pattern: /^[1-9]{9}$/,
+                  required: true,
+                  pattern: /^[1-9]{8}$/,
                 })} 
                 className="form-control" 
               />
-              {errors?.celular?.type === "pattern" && <p>Escribir 9 digitos</p>}
+              {errors?.dni?.type === "required" && <p>Completar este campo</p>}
+              {errors?.dni?.type === "pattern" && <p>Escribir 8 digitos</p>}
             </div>
 
             {/* sexo */}
             <div className="col-6">
               <div onChange={onChangeCheckradio}>
-                <label htmlFor="">Género:</label>
+                <label >Género:</label>
                 <br />
                 <input
                   className="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
-                  value="1"
+                  value="0"
                 />
                 <label className="ms-2">Femenino</label>
                 <input
                   className="form-check-input ms-2"
                   type="radio"
                   name="inlineRadioOptions"
-                  value="2"
+                  value="1"
                 />
                 <label className="ms-2">Masculino</label>
               </div>
@@ -161,7 +176,7 @@ export const AddDoctor = () => {
               optionEspecialidad={optionEspecialidad} 
               setOptionEspecialidad={setOptionEspecialidad}
             />
-            <button type="button" onClick={ onVer }> Ver2 </button>
+            
 
             {/* Hospital*/}
             <AddHospital 
@@ -175,8 +190,9 @@ export const AddDoctor = () => {
               setNombreS={setNombreS}
               descripcionS={descripcionS}
               setDescripcionS={setDescripcionS}
-
             />
+
+            <button type="button" onClick={ onVer }> Ver2 </button>
 
             <div className="col-3">
               <button className="btn btn-primary" type="submit">
