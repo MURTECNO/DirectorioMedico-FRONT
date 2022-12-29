@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { AddEspecialidad, AddHospital, AddServicios } from "./index";
+import { AddEspecialidad, AddHospital, AddServicios, postDoctor } from "./index";
 
 export const AddDoctor = () => {
 
@@ -23,6 +23,7 @@ export const AddDoctor = () => {
     e.target.reset();
     console.log('entra');
     console.log(data);
+    postDoctor(data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS);
   };
 
   const onVer = ()=>{
@@ -44,7 +45,7 @@ export const AddDoctor = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="form-section">
+      <form onSubmit={handleSubmit(onSubmit)} className="form-section mb-5">
 
           <div className="cuadrado">
             <IconButton
@@ -177,7 +178,6 @@ export const AddDoctor = () => {
               setOptionEspecialidad={setOptionEspecialidad}
             />
             
-
             {/* Hospital*/}
             <AddHospital 
               setOptHospital={setOptHospital}
@@ -192,8 +192,7 @@ export const AddDoctor = () => {
               setDescripcionS={setDescripcionS}
             />
 
-            <button type="button" onClick={ onVer }> Ver2 </button>
-
+            {/* <button type="button" onClick={ onVer }> Ver2 </button> */}
             <div className="col-3">
               <button className="btn btn-primary" type="submit">
                 Guardar
