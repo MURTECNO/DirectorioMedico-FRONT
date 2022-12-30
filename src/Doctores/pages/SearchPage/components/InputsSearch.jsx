@@ -20,8 +20,9 @@ export const InputsSearch = ({ setValEspecialidad, setValDistrito, onFilter, set
 
   const onSelectDistrito = event => {
     const { target } = event;
-    const { value } = target;
-    setValDistrito(value);
+    const { value, children } = target;
+    const seleccionado = target[value].text;
+    setValDistrito(seleccionado);
   }
 
   const onClickEspecialidad = event => {

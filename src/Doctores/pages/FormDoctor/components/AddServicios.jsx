@@ -13,7 +13,6 @@ export const AddServicios = ({
     const [display, setDisplay] = useState("none");
 
     useEffect(() => {
-        console.log('entra');
         setValNombreS('');
         setValDescripcionS('')
     }, [listServicios]);
