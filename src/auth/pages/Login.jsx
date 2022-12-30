@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { postAuth } from "../index";
 
 export const Login = () => {
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
-  const onLogin = ()=>{
+  const onLogin = () => {
+
     navigate('/formulario',{
       replace: true
     });
