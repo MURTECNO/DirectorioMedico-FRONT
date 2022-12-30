@@ -1,5 +1,5 @@
 
-export const postDoctor = async (data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS) => {
+export const postDoctor = async (data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS, setStatus) => {
     const {apellidos, nombres, cmp, celular, dni, trayectoria} = data;
     const _datos = {
         nombres: nombres,
@@ -25,7 +25,13 @@ export const postDoctor = async (data, sexo, optionEspecialidad, optHospital, no
 
         const response = await fetch(URL, requestOptions);
         const { status } = response;
-        console.log(status);
+        setStatus(status);
+
+        if( status === 200 ){
+            alert('Registro exitoso');
+          }else{
+            alert('Error en el registro');
+          }
 
         
     } catch (error) {

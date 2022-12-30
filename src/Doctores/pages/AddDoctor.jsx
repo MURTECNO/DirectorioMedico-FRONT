@@ -17,13 +17,14 @@ export const AddDoctor = () => {
   const [optHospital, setOptHospital] = useState([]);
   const [nombreS, setNombreS] = useState([]);
   const [descripcionS, setDescripcionS] = useState([]);
+  const [status, setStatus] = useState(0);
 
   // SUBMIT FORM
   const onSubmit = (data, e) => {
-    e.target.reset();
     console.log('entra');
     console.log(data);
-    postDoctor(data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS);
+    postDoctor(data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS, setStatus);
+
   };
 
   const onVer = ()=>{
