@@ -16,8 +16,8 @@ export const NavbarIngreso = () => {
         <div className="navBar">
             <div className="content-nav">
                 <div className="navLeft">
-                    <MdReorder size = {23} />
-                    <img src={logo} alt="" />
+                    {/* <MdReorder size = {23} />
+                    <img src={logo} alt="" /> */}
 
                 </div>
 

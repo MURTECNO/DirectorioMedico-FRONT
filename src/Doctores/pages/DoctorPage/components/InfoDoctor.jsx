@@ -52,10 +52,10 @@ export const InfoDoctor = (props) => {
                 </div>
                 <div>
                     {
-                        hospitales.map( hos => {
-                            const { nombre } = hos
+                        hospitales.map( (data, index) => {
+                            const { nombre } = data
                             return (
-                                <div key={ cmp }>
+                                <div key={ index }>
                                     <b><span><FaHospitalAlt size={15} className='mb-1 me-2 my-1'/>Hospital: </span></b>
                                     {nombre}
                                 </div>

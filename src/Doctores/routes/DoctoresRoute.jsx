@@ -9,7 +9,7 @@ export const DoctoresRoute = () => {
 
         <Routes>
             <Route path="inicio" element={ <SearchDoctor/> } />
-            <Route path="perfil/:id" element={ <PerfilDoctor/> } />
+            <Route path="perfil/:id" element={ <PerfilDoctor number={2}/> } />
         </Routes>
 
     </>
