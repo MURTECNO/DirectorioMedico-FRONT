@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { set, useForm } from "react-hook-form";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { AddEspecialidad, AddHospital, AddServicios, postDoctor } from "./index";
+import { useParams, Link } from 'react-router-dom';
+import { getDoctorById, putDoctorById, putImageDoctor } from "../pages";
 
 export const AddDoctor = () => {
 
@@ -12,19 +14,30 @@ export const AddDoctor = () => {
     formState: { errors },
   } = useForm({ mode: "onBlur" });
 
+
+  const { id } = useParams();
+  
+  const [ doc, setDoc ] = useState({});
+  const [ loading, setLoading ] = useState(true);
   const [sexo, setSexo] = useState("");
   const [optionEspecialidad, setOptionEspecialidad] = useState([]);
   const [optHospital, setOptHospital] = useState([]);
   const [nombreS, setNombreS] = useState([]);
   const [descripcionS, setDescripcionS] = useState([]);
   const [status, setStatus] = useState(0);
+  const [image, setImage] = useState({});
+
+  useEffect(()=>{
+    getDoctorById( id, setDoc, setLoading);
+  },[]);
 
   // SUBMIT FORM
   const onSubmit = (data, e) => {
     console.log('entra');
     console.log(data);
     postDoctor(data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS, setStatus);
-
+    putDoctorById( id, data, sexo);
+    
   };
 
   const onVer = ()=>{
@@ -35,14 +48,23 @@ export const AddDoctor = () => {
       "servicios_nombre": nombreS,
       "servicios_descrip": descripcionS
     }
-    // console.log('nombres: ' , nombreS);
-    // console.log('descripciones: ' , descripcionS);
-    console.log('Detalles del doctor:' , data);
+
   }
 
   const onChangeCheckradio = ({ target }) => {
     setSexo(target.value);
   };
+
+  const onChangeImage = ( event ) =>{
+    const file = event.target.files[0];
+    setImage(file);
+  } 
+
+  const clickPrueba = async ()=>{
+    console.log('entra')
+    putImageDoctor( image, id );
+
+  }
 
   return (
     <>
@@ -56,10 +78,9 @@ export const AddDoctor = () => {
             >
               <input
                 type="file"
+                name="image"
                 hidden
-                onChange={(e) => {
-                  console.log(e.target.value);
-                }}
+                onChange={ onChangeImage }
               />
               <PhotoCamera />
             </IconButton>
@@ -70,7 +91,7 @@ export const AddDoctor = () => {
             {/* Apellidos */}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Apellidos: </label>
-              <input
+              <input value={doc.apellidos}
                 {...register("apellidos", {
                   required: true,
                   pattern: /^[A-Za-z]/i,
@@ -88,7 +109,7 @@ export const AddDoctor = () => {
             {/* Nombres */}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Nombres: </label>
-              <input
+              <input value={doc.nombres}
                 {...register("nombres", {
                   required: true,
                   pattern: /^[A-Za-z]/i,
@@ -102,21 +123,21 @@ export const AddDoctor = () => {
             {/* CMP */}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>CMP: </label>
-              <input
+              <input value={doc.cmp}
                 {...register("cmp", {
                   required: true,
-                  pattern: /^[1-9]{7}$/,
+                  pattern: /^[1-9]{6}$/,
                 })}
                 className="form-control"
               />
               {errors?.cmp?.type === "required" && <p>Completar este campo</p>}
-              {errors?.cmp?.type === "pattern" && <p>Escribir 7 digitos</p>}
+              {errors?.cmp?.type === "pattern" && <p>Escribir 6 digitos</p>}
             </div>
 
             {/* Celular */}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>Celular: </label>
-              <input 
+              <input value={doc.celular}
                 {...register("celular", {
                   required: true,
                   pattern: /^[1-9]{9}$/,
@@ -130,7 +151,7 @@ export const AddDoctor = () => {
             {/*dni*/}
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6">
               <label>DNI: </label>
-              <input 
+              <input value={doc.dni}
                 {...register("dni", {
                   required: true,
                   pattern: /^[1-9]{8}$/,
@@ -166,7 +187,7 @@ export const AddDoctor = () => {
             {/* Trayectoria Profesional*/}
             <div className="col-12">
               <label>Trayectoria Profesional: </label>
-              <textarea
+              <textarea value={doc.trayectoria}
                 {...register("trayectoria")}
                 className="form-control"
                 rows="3"
@@ -194,10 +215,14 @@ export const AddDoctor = () => {
             />
 
             {/* <button type="button" onClick={ onVer }> Ver2 </button> */}
-            <div className="col-3">
+            <div className="col-12">
               <button className="btn btn-primary" type="submit">
                 Guardar
               </button>
+              <Link to={`/login/perfilEdit/${id}`}>
+                <button className="btn btn-primary ms-3"> Regresar</button>
+              </Link>
+              <button type="button" onClick={clickPrueba}>Prueba</button>
             </div>
 
           </div>
