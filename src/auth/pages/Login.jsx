@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, Link} from "react-router-dom"
 import { postAuth } from "../index";
 
 export const Login = () => {
-  const { id } = useParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState(true);
@@ -61,6 +60,10 @@ export const Login = () => {
       className="btn btn-primary"
       onClick={ onLogin }
       >Ingresar</button>
+
+      <Link to={`/registrar`}>
+        <button className="btn btn-primary">Registrar</button>
+      </Link>
     </div>
     
     </>

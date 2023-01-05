@@ -1,7 +1,7 @@
 
-export const postDoctor = async (data, sexo, optionEspecialidad, optHospital, nombreS, descripcionS, setStatus) => {
-    const {apellidos, nombres, cmp, celular, dni, trayectoria} = data;
-    const _datos = {
+export const putDoctorById = async ( id, nombres, apellidos, dni, cmp, celular, sexo, trayectoria, optionEspecialidad, optHospital, nombreS, descripcionS  ) =>{
+
+    const _datos= {
         nombres: nombres,
         apellidos: apellidos,
         dni: dni,
@@ -15,26 +15,17 @@ export const postDoctor = async (data, sexo, optionEspecialidad, optHospital, no
         servicios_descrip: descripcionS
     }
 
-    try {
-        const URL = "http://10.23.23.5:3001/doctores";
+    try{
+        const URL = `http://10.23.23.5:3001/doctores/${id}`;
         const requestOptions = {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(_datos),
             headers: {"Content-type": "application/json"}
         }
 
         const response = await fetch(URL, requestOptions);
         const { status } = response;
-        setStatus(status);
-
-        if( status === 200 ){
-            alert('Registro exitoso');
-          }else{
-            alert('Error en el registro');
-          }
-
-        
-    } catch (error) {
-        
+    } catch(err){
+        console.log(err);
     }
 }

@@ -1,0 +1,34 @@
+body{
+    background-color: #F5F5F5;
+}
+.content-registrar{
+    /* background-color: blue; */
+    
+}
+
+.form-content{
+    width: 22rem;
+    height: 40rem;
+    margin: auto;
+    border: 1px solid #D9D9D9;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+}
+
+.img-fondo {
+    width: 100px;
+}
+
+.img-fondo img{
+    width: 40rem;
+}
+
+.row{
+    grid-gap: 15px 0px !important;
+}

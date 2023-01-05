@@ -13,19 +13,23 @@ export const PerfilDoctor = ({ number }) => {
   const [ loading, setLoading ] = useState(true);
   const [ display, setDisplay] = useState('none'); 
 
-  // const doc = getDoctorById( parseInt(id) );
-
   useEffect(() => {
-    getDoctorById(id, setDoc, setLoading);
-    console.log(id);
+    getDoctorById(id, setDoc)
+    .then( res => {
+      
+      setDoc(res);
+      setLoading(false);
+
+    })
+
     if(number === 1){
       setDisplay('');
     }
 }, [])
 
-  if(loading) return <h2>loading...</h2>
+if(loading) return <h3>Loafing</h3>;
 
-  return (
+return (
     <>
       <div className="section">
         <div className="header-content d-flex">
@@ -44,4 +48,5 @@ export const PerfilDoctor = ({ number }) => {
       </div> 
     </>
   );
+  // if(loading) return <h2>loading...</h2> 
 };

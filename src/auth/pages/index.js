@@ -1,3 +1,2 @@
-
-
-export { Login } from './Login'
+export * from './Login';
+export * from './Registrar';

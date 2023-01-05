@@ -1,4 +1,4 @@
-export const getDoctorById = async (id, setData, setLoading) => {
+export const getDoctorById = async (id, setDoc) => {
 
     try {
         const URL = `http://10.23.23.5:3001/doctores/${id}`;
@@ -12,10 +12,9 @@ export const getDoctorById = async (id, setData, setLoading) => {
 
         // parse to json
         const data =  await response.json()
-
+        // setDoc(data);
+        return data;
         // set data
-        setData(data)
-        setLoading(false)
         
     } catch (error) {
         console.log({error})

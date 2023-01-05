@@ -104,6 +104,7 @@ export const AddHospital = ({
                     <select 
                         className='form-select'
                         id='0'
+                        required
                         onChange={ e=>{
                             onChangeHospital(e);
                         }  }

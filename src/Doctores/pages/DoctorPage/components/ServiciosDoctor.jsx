@@ -8,6 +8,7 @@ export const ServiciosDoctor = ({servicios}) => {
         <div className="container-servicios">
             {
                 servicios.map( serv => {
+                    if(!servicios) return;
                     const { id, descripcion, nombre } = serv;
                     return (
                         <div className="card card-servicio" key={ id }>

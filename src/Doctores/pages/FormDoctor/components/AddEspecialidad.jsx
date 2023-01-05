@@ -91,6 +91,7 @@ export const AddEspecialidad = ({
               <select 
                   className="form-select"
                   id="0"
+                  required
                   onChange={ e =>{
                     onEspecialidad( e );
                   }}

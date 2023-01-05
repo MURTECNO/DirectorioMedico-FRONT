@@ -86,6 +86,7 @@ export const AddServicios = ({
                     <input 
                         className="form-control" 
                         placeholder="Nombre Servicio"
+                        required
                         onChange={ onNombreS }
                     />
 
@@ -100,6 +101,7 @@ export const AddServicios = ({
             <textarea 
                 className="form-control" 
                 placeholder="Descripcion del Servicio"
+                required
                 onChange={ onDescripcionS }
                 onBlur={ onBlurDescripcion1 }
             ></textarea>

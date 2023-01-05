@@ -1,8 +1,7 @@
 import { FaUserMd, FaMedkit, FaHospitalAlt, FaWhatsapp } from "react-icons/fa";
-import perrito from '../../../../assets/perrito.jpg'
 
 export const InfoDoctor = (props) => {
-
+debugger;
     const {
         nombres,
         apellidos,
@@ -11,6 +10,7 @@ export const InfoDoctor = (props) => {
         id_sexo,
         trayectoria,
         especialidades,
+        foto,
         hospitales
     } = props;
 
@@ -19,7 +19,7 @@ export const InfoDoctor = (props) => {
     return (
         <>
             <div className="cuadrado">
-                <img className="img-format" src={perrito} alt={apellidos} />
+                <img className="img-format mt-2" src={foto} alt={apellidos} />
             </div>
 
             <div className="info-content">
@@ -53,6 +53,7 @@ export const InfoDoctor = (props) => {
                 <div>
                     {
                         hospitales.map( (data, index) => {
+                            if(!hospitales) return;
                             const { nombre } = data
                             return (
                                 <div key={ index }>

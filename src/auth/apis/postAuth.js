@@ -16,9 +16,8 @@ export const postAuth = async ( email, password, setStatus ) => {
     const response = await fetch(URL, requestOptions)
     .then( res => res.json() )
     .then( token => { 
+        console.log('token', token);
         return token;
-        // setStatus(token);
-        // console.log(token);
     } )
 
     return response;
