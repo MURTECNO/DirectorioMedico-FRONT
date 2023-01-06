@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Link} from "react-router-dom";
 import { postDoctor } from "../index"
-import fondo_login from '../../assets/fondo_login.png';
+import fondo_registro from '../../assets/fondo_registro.png';
+import logo from '../../assets/logo.png'
 import '../authStyle.css';
 
 export const Registrar = () => {
@@ -25,20 +26,20 @@ export const Registrar = () => {
     };
 
   return (
-    <div className="content-registrar d-flex">
+    <div className="container content-registrar ">
         <div className="img-fondo">
-            <img src={fondo_login} alt="" />
+            <img src={fondo_registro} alt="" />
         </div>
 
         <div className="form-content p-4 my-5">
 
-            <div>
-                <h3>Registrar</h3>
+            <div className="my-3">
+                <img src={logo} style={{width: '8rem'}} />
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="mt-2 mb-5">
 
-                <div className="form-inputs row g-0">
+                <div className="form-inputs row">
                 
                     {/* Apellidos */}
                     <div >
@@ -87,7 +88,7 @@ export const Registrar = () => {
                     </div>
 
                     {/* sexo */}
-                    <div className="col-6">
+                    <div>
                         <div onChange={onChangeCheckradio}>
                         <label >Género:</label>
                         <br />
@@ -128,10 +129,14 @@ export const Registrar = () => {
                         />
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary">Guardar</button>
-                <Link to={`/login`}>
-                    <button type="button" className="btn btn-primary">Regresar</button>
-                </Link>
+
+                <div className="mt-3">
+                    <button type="submit" className="btn btn-primary mx-2">Guardar</button>
+                    <Link to={`/login`}>
+                        <button type="button" className="btn btn-primary mx-2">Regresar</button>
+                    </Link>
+
+                </div>
             </form>
 
         </div>

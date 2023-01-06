@@ -1,4 +1,5 @@
 import { FaUserMd, FaMedkit, FaHospitalAlt, FaWhatsapp } from "react-icons/fa";
+import doctor from '../../../../assets/doctor.jpg'
 
 export const InfoDoctor = (props) => {
     const {
@@ -12,13 +13,14 @@ export const InfoDoctor = (props) => {
         foto,
         hospitales
     } = props;
+    const imgPerfil = foto? foto : doctor;
 
     const url = `https://api.whatsapp.com/send?phone=+51${celular}&text=Hola, me gustaría separar una cita con usted`
 
     return (
         <>
             <div className="cuadrado">
-                <img className="img-format mt-2" src={foto} alt={apellidos} />
+                <img className="img-format mt-2" src={imgPerfil} alt={apellidos} />
             </div>
 
             <div className="info-content">

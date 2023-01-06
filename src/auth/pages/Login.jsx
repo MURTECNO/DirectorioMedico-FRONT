@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link} from "react-router-dom"
 import { postAuth } from "../index";
+import logo from '../../assets/logo.png'
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,34 +39,41 @@ export const Login = () => {
   }
 
   return (
-    <>
-    <div className="container mt-5">
-      <h1>Login</h1>
+    <div className="login-section pt-5">
 
-      <hr />
+      <div className="form-login p-5 ">
 
-      <div>
-        <label >Correo:</label>
-        <br />
-        <input type="text" onChange={ onChangeEmail } />
+          <Link to={`/inicio`}>
+            <img src={logo} className='mb-4' style={{width: '10rem'}}/>
+          </Link>
+
+        <div className="row">
+
+          <div>
+            <label >Correo:</label>
+            <input type="text" className="form-control" onChange={ onChangeEmail } />
+          </div>
+
+          <div>
+            <label >Contraseña:</label>
+            <input type="text" className="form-control" onChange={ onChangePassword }/>
+          </div>
+          
+          <div className="d-flex mt-3">
+            <button
+            className="btn btn-primary mx-2"
+            onClick={ onLogin }
+            >Ingresar</button>
+
+            <Link to={`/registrar`}>
+              <button className="btn btn-primary mx-2">Registrar</button>
+            </Link>
+          </div>
+
+        </div>
       </div>
 
-      <div>
-        <label >Contraseña:</label>
-        <br />
-        <input type="text" onChange={ onChangePassword }/>
-      </div>
-      
-      <button
-      className="btn btn-primary"
-      onClick={ onLogin }
-      >Ingresar</button>
-
-      <Link to={`/registrar`}>
-        <button className="btn btn-primary">Registrar</button>
-      </Link>
     </div>
-    
-    </>
+
   )
 }
