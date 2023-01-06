@@ -1,8 +1,14 @@
 /* PERFIL DOCTOR */
+.info-section{
+    max-width: 1080px;
+}
+
 .info-content{
     font-size: 15px;
     margin-top: 3rem;
-    margin-left: 3rem;
+    margin-left: 2rem;
+    width: 80%;
+    /* padding-left: 5rem; */
 }
 
 .container-servicios{

@@ -10,7 +10,7 @@ export const PerfilDoctor = ({ number }) => {
 
   const [ doc, setDoc ] = useState({});
   const [ loading, setLoading ] = useState(true);
-  const [ display, setDisplay] = useState('none'); 
+  
 
   useEffect(() => {
     getDoctorById(id, setDoc)
@@ -21,29 +21,21 @@ export const PerfilDoctor = ({ number }) => {
 
     })
 
-    if(number === 1){
-      setDisplay('');
-    }
 }, [])
 
 if(loading) return <h3>Loading</h3>;
 
 return (
     <>
-      <div className="section">
+      <div className="container section">
         <div className="header-content d-flex">
-          <InfoDoctor {...doc}/>
+          <InfoDoctor {...doc} number={number}/>
         </div>
 
         <div className="servicios-content my-5">
           <ServiciosDoctor {...doc}/>
         </div>
 
-        <div style={{ display: display }}>
-          <Link to={`/login/formulario/${id}`}>
-            <button>Editar</button>
-          </Link>
-        </div>
       </div> 
     </>
   );
