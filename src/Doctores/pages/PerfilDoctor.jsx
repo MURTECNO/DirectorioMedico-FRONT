@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { InfoDoctor,ServiciosDoctor } from "./index";
 import { getDoctorById } from "../pages";
-import { Link } from 'react-router-dom'
 
 import './DoctorPage/perfilStyle.css'
 
@@ -16,7 +15,7 @@ export const PerfilDoctor = ({ number }) => {
   useEffect(() => {
     getDoctorById(id, setDoc)
     .then( res => {
-      
+
       setDoc(res);
       setLoading(false);
 
@@ -27,7 +26,7 @@ export const PerfilDoctor = ({ number }) => {
     }
 }, [])
 
-if(loading) return <h3>Loafing</h3>;
+if(loading) return <h3>Loading</h3>;
 
 return (
     <>

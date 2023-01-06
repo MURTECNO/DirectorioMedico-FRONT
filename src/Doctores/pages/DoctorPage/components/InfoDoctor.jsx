@@ -1,7 +1,6 @@
 import { FaUserMd, FaMedkit, FaHospitalAlt, FaWhatsapp } from "react-icons/fa";
 
 export const InfoDoctor = (props) => {
-debugger;
     const {
         nombres,
         apellidos,

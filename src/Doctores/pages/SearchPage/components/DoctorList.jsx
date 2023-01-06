@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { CardDoctor } from "./CardDoctor";
 
 export const DoctorList = ({ doctores }) => {

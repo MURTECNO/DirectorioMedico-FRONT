@@ -25,7 +25,9 @@ export const putDoctorById = async ( id, nombres, apellidos, dni, cmp, celular, 
 
         const response = await fetch(URL, requestOptions);
         const { status } = response;
+
+        return status;
     } catch(err){
-        console.log(err);
+        return err;
     }
 }
