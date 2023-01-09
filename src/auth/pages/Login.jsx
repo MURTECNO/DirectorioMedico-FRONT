@@ -63,7 +63,7 @@ export const Login = () => {
 
           <div>
             <label >Contraseña:</label>
-            <input type="text" className="form-control" onChange={ onChangePassword }/>
+            <input type="password" className="form-control" onChange={ onChangePassword }/>
           </div>
           
           <div className="d-flex mt-3">
