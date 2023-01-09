@@ -1,12 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { postDoctor } from "../index"
 import fondo_registro from '../../assets/fondo_registro.png';
 import logo from '../../assets/logo.png'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import '../authStyle.css';
 
 export const Registrar = () => {
+
+    const MySwal = withReactContent(Swal);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -19,6 +25,17 @@ export const Registrar = () => {
     const onSubmit = (data, e) => {
         e.preventDefault();
         postDoctor(data, sexo);
+        MySwal.fire({
+            icon: 'info',
+            title: 'Gracias!',
+            text: 'Se evaluará la información y se enviarán las credenciales a su correo'
+          }).then( result =>{
+            if(result.isConfirmed){
+                navigate('/login',{
+                    replace:true
+                })
+            }
+          })
     };
 
     const onChangeCheckradio = ({ target }) => {
@@ -119,24 +136,16 @@ export const Registrar = () => {
                         />
                     </div>
 
-                    <div >
-                        <label>Contraseña: </label>
-                        <input
-                        {...register("password", {
-                            required: true,
-                        })}
-                        className="form-control"
-                        />
-                    </div>
                 </div>
 
                 <div className="mt-3">
-                    <button type="submit" className="btn btn-primary mx-2">Guardar</button>
+                    <button type="submit" className="btn btn-primary mx-2">Enviar</button>
                     <Link to={`/login`}>
                         <button type="button" className="btn btn-primary mx-2">Regresar</button>
                     </Link>
 
                 </div>
+
             </form>
 
         </div>

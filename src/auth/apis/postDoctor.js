@@ -1,13 +1,12 @@
 
 export const postDoctor = async ( data, sexo ) => {
-    const {apellidos, nombres, dni, email, password} = data;
+    const {apellidos, nombres, dni, email} = data;
     const _datos = {
         nombres: nombres,
         apellidos: apellidos,
         dni: dni,
         id_sexo: sexo,
-        email: email,
-        password:password
+        email: email
     }
 
     try {
@@ -20,7 +19,6 @@ export const postDoctor = async ( data, sexo ) => {
 
         const response = await fetch(URL, requestOptions);
         const { status } = response;
-        debugger;
 
         if( status === 200 ){
             alert('Registro exitoso');

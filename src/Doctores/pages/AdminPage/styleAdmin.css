@@ -1,0 +1,22 @@
+.card-container{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    height: auto;
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 2px rgba(0,0,0, .2);
+    align-items: center;
+}
+
+.img-container{
+    padding: 10px;
+}
+
+.info-card{
+    
+    width: 25rem;
+}
+
+.validar-section{
+    display: flex;
+}
