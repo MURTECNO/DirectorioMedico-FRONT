@@ -12,7 +12,6 @@ export const AppRouter = () => {
               <Route path="login" element={ <Login/> }/>
               <Route path="registrar" element={ <Registrar/> }/>
               <Route path="/*" element={ <DoctoresRoute/> }/>
-              {/* <Route path="/formulario" element={ <FormularioRoute/> }/> */}
               <Route path="/login/*" element={ <FormularioRoute/> }/>
               <Route path="/" element={ <Navigate to='inicio'/> }/>
             

@@ -13,13 +13,20 @@ export const Login = () => {
   const onLogin = () => {
     postAuth( email, password, setStatus )
     .then(response => {
-      const { data, token } = response;
+      const { data, token, rol } = response;
+      console.log(rol);
       const { id } = data;
       // debugger;
+      if(rol==='administrador'){
+        navigate(`/login/admin`,{
+          replace: true
+          });
+      }else{
+        navigate(`/login/perfilEdit/${id}`,{
+          replace: true
+          });
+      }
       
-      navigate(`/login/perfilEdit/${id}`,{
-        replace: true
-        });
 
     })
     .catch( err => console.log(err));

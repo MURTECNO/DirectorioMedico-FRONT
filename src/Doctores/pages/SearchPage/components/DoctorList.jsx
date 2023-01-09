@@ -1,7 +1,6 @@
 import { CardDoctor } from "./CardDoctor";
 
 export const DoctorList = ({ doctores }) => {
-    console.log(doctores);
 
     return (
         <>

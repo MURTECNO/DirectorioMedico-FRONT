@@ -1,4 +1,5 @@
 export * from './AddDoctor';
+export * from './AdminPage';
 export * from './DoctorPage/api';
 export * from './DoctorPage/components';
 export * from './FormDoctor/api';
